@@ -1,0 +1,17 @@
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\bin\Debug\liblsl64.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\bin\Debug\LabStreamLayer-AppTest.exe.config
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\bin\Debug\LabStreamLayer-AppTest.exe
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\bin\Debug\LabStreamLayer-AppTest.pdb
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\obj\Debug\LabStreamLayer-AppTest.csprojAssemblyReference.cache
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\obj\Debug\MainWindow.g.cs
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\obj\Debug\App.g.cs
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\obj\Debug\LabStreamLayer-AppTest_Content.g.cs
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\obj\Debug\LabStreamLayer-AppTest_MarkupCompile.cache
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\obj\Debug\LabStreamLayer-AppTest_MarkupCompile.lref
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\obj\Debug\MainWindow.baml
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\obj\Debug\LabStreamLayer-AppTest.g.resources
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\obj\Debug\LabStreamLayer_AppTest.Properties.Resources.resources
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\obj\Debug\LabStreamLayer-AppTest.csproj.GenerateResource.cache
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\obj\Debug\LabStreamLayer-AppTest.csproj.CoreCompileInputs.cache
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\obj\Debug\LabStreamLayer-AppTest.exe
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\obj\Debug\LabStreamLayer-AppTest.pdb
