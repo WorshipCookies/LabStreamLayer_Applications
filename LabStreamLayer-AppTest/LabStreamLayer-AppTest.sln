@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabStreamLayer-AppTest", "L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabStreamLayer-RandomSignalSender", "LabStreamLayer-RandomSignalSender\LabStreamLayer-RandomSignalSender.csproj", "{1DBAB296-F403-4EB2-AFED-6C62DA29797A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitalinoRecorder", "BitalinoRecorder\BitalinoRecorder.csproj", "{B16D8483-3186-4929-A667-7E62EAF7435C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,18 @@ Global
 		{1DBAB296-F403-4EB2-AFED-6C62DA29797A}.Release|x64.Build.0 = Release|Any CPU
 		{1DBAB296-F403-4EB2-AFED-6C62DA29797A}.Release|x86.ActiveCfg = Release|Any CPU
 		{1DBAB296-F403-4EB2-AFED-6C62DA29797A}.Release|x86.Build.0 = Release|Any CPU
+		{B16D8483-3186-4929-A667-7E62EAF7435C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B16D8483-3186-4929-A667-7E62EAF7435C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B16D8483-3186-4929-A667-7E62EAF7435C}.Debug|x64.ActiveCfg = Debug|x64
+		{B16D8483-3186-4929-A667-7E62EAF7435C}.Debug|x64.Build.0 = Debug|x64
+		{B16D8483-3186-4929-A667-7E62EAF7435C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B16D8483-3186-4929-A667-7E62EAF7435C}.Debug|x86.Build.0 = Debug|Any CPU
+		{B16D8483-3186-4929-A667-7E62EAF7435C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B16D8483-3186-4929-A667-7E62EAF7435C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B16D8483-3186-4929-A667-7E62EAF7435C}.Release|x64.ActiveCfg = Release|Any CPU
+		{B16D8483-3186-4929-A667-7E62EAF7435C}.Release|x64.Build.0 = Release|Any CPU
+		{B16D8483-3186-4929-A667-7E62EAF7435C}.Release|x86.ActiveCfg = Release|Any CPU
+		{B16D8483-3186-4929-A667-7E62EAF7435C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

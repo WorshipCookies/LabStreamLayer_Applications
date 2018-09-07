@@ -1,0 +1,17 @@
+﻿<Window x:Name="mainWindow" x:Class="BitalinoRecorder.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BitalinoRecorder"
+        mc:Ignorable="d"
+        Title="Bitalino Connect" Height="450" Width="800">
+    <Grid>
+        <ListBox x:Name="BlinoDeviceList" HorizontalAlignment="Left" Height="192" Margin="27,24,0,0" VerticalAlignment="Top" Width="257"/>
+        <Button x:Name="connectButton" Content="Connect To Device" HorizontalAlignment="Left" Margin="325,36,0,0" VerticalAlignment="Top" Width="156" Height="57" Click="connectButton_Click"/>
+        <TextBox x:Name="infoOutputBox" HorizontalAlignment="Left" Height="101" Margin="310,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
+        <Button x:Name="startStreamingButton" Content="Start Streaming" HorizontalAlignment="Left" Height="67" Margin="72,293,0,0" VerticalAlignment="Top" Width="158" IsEnabled="False" Click="startStreamingButton_Click"/>
+        <TextBox x:Name="streamingOutputBox" HorizontalAlignment="Left" Height="130" Margin="289,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="452"/>
+
+    </Grid>
+</Window>
