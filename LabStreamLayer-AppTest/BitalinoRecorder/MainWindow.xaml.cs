@@ -42,8 +42,8 @@ namespace BitalinoRecorder
         /**
          * Event triggers once the device is connected.
          * **/
-        public delegate void OnVariableChangeDelegate(Bitalino newValue);
-        public event OnVariableChangeDelegate OnVariableChange;
+        private delegate void OnVariableChangeDelegate(Bitalino newValue);
+        private event OnVariableChangeDelegate OnVariableChange;
 
         // MAC Address of the selected Device
         private string macAddress;
@@ -52,10 +52,20 @@ namespace BitalinoRecorder
         private static List<string> bufferList = new List<string>();
 
         // Streaming flag to effectively stop bitalino streaming. 
-        private static bool IS_STREAMING = false;
+        private static volatile bool IS_STREAMING = false;
 
         // Thread that will be streaming data
         private Thread streamingThread;
+
+        /**
+         * Event Triggers to control the thread once it ends.
+         **/
+        private delegate void OnThreadFinishDelegate();
+        private event OnThreadFinishDelegate OnThreadChange;
+
+        // Necessary to delegate content obtained from Bitalino Thread to the UI
+        private delegate void UpdateStreamBoxCallback(string text);
+
 
         public MainWindow()
         {
@@ -79,27 +89,33 @@ namespace BitalinoRecorder
             }
         }
 
-
-        private void StreamData()
+        private void StreamData(Bitalino dev)
         {
-            Bitalino dev = connected_device;
-
+            
             dev.start(1000, new int[] { 0 });
 
             Bitalino.Frame[] frames = new Bitalino.Frame[100];
             for (int i = 0; i < frames.Length; i++)
                 frames[i] = new Bitalino.Frame(); // must initialize all elements in the array
 
-            while (IS_STREAMING)
+            while (MainWindow.IS_STREAMING)
             {
                 dev.read(frames);
                 string s = "";
                 foreach (Bitalino.Frame f in frames)
                 {
-                    
+                    s += f.analog[0];
+                    s += " ";
                 }
+                // Delegate the Output Values to the Streaming Text Box
+                streamingOutputBox.Dispatcher.Invoke(
+                    new UpdateStreamBoxCallback(this.AppendStreamTextBox), 
+                    new object[] { s }); 
             }
-
+            dev.stop();
+            streamingOutputBox.Dispatcher.Invoke(
+                    new UpdateStreamBoxCallback(this.AppendStreamTextBox),
+                    new object[] { "Thread Successfully Closed" });
         }
 
         private void connectButton_Click(object sender, RoutedEventArgs e)
@@ -143,19 +159,30 @@ namespace BitalinoRecorder
             }
         }
 
+        private void AppendStreamTextBox(string textVal)
+        {
+            this.streamingOutputBox.Text = textVal;
+        }
+
         private void startStreamingButton_Click(object sender, RoutedEventArgs e)
         {
             if (IS_STREAMING)
             {
                 IS_STREAMING = false;
-
-                // Wait for Thread to Stop -- might want to delegate this to a specific event.
+                startStreamingButton.Content = "Start Streaming";
             }
-            else
+            else if (!IS_STREAMING)
             {
                 IS_STREAMING = true;
+
                 // Run Thread
+                startStreamingButton.Content = "Stop Streaming";
+                streamingThread = new Thread(() => StreamData(connected_device)); // Pass the connected device argument to the thread
+                streamingThread.Start(); // Start Streaming
             }
         }
+
+        
+
     }
 }
