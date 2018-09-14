@@ -72,12 +72,12 @@ namespace BitalinoRecorder
         private const string guid = "98FF4C8E-5C2D-42E9-8F1B-8505643EAC2C"; // Unique Process ID -- Pre-Generated
 
         private string lslStreamName = "Bitalino Streamer";
-        private string lslStreamType = "EMG";
-        private double sampling_rate = 100;
+        private string lslStreamType = "Physiological-Signals";
+        private int sampling_rate = 0; // Default Value
 
         private liblsl.StreamInfo lslStreamInfo;
         private liblsl.StreamOutlet lslOutlet = null; // The Streaming Outlet
-        private int lslChannelCount = 1; // Number of Channels to Stream
+        private int lslChannelCount = 0; // Number of Channels to Stream by Default
 
         private const liblsl.channel_format_t lslChannelFormat = liblsl.channel_format_t.cf_int16; // Stream Variable Format
 
@@ -86,6 +86,7 @@ namespace BitalinoRecorder
         {
             InitializeComponent();
             ShowDevices();
+            ShowSamplingRates();
             this.Closed += new EventHandler(OnWindowClosing);
             OnVariableChange += EnableStreamingButton;
         }
@@ -104,13 +105,22 @@ namespace BitalinoRecorder
             }
         }
 
-        private void StreamData(Bitalino dev, liblsl.StreamOutlet lslout)
+        private void ShowSamplingRates()
         {
-            
-            dev.start(100, new int[] { 0 });
+            SamplingRateListBox.Items.Add(10);
+            SamplingRateListBox.Items.Add(100);
+            SamplingRateListBox.Items.Add(1000);
+
+            SamplingRateListBox.SelectedIndex = 1; // Select the default value of 100 Hz at the beginning.
+        }
+
+        private void StreamData(Bitalino dev, liblsl.StreamOutlet lslout, bool ecg, bool eda, bool resp)
+        {
+            // Simpler this way. By Default lets just open all channels we assume will be open.
+            dev.start(sampling_rate, new int[] { 0, 1, 2 });
 
             // Data Structure used for Streaming Data
-            short[,] sample = new short[lslChannelCount,100]; // Initialize Sample to the number of available Channels and chunked samples we want to send.
+            short[,] sample = new short[100, lslChannelCount]; // Initialize Sample to the number of available Channels and chunked samples we want to send.
 
             Bitalino.Frame[] frames = new Bitalino.Frame[100];
             for (int i = 0; i < frames.Length; i++)
@@ -118,13 +128,45 @@ namespace BitalinoRecorder
 
             while (MainWindow.IS_STREAMING)
             {
+
+                double start_clock = liblsl.local_clock(); // Record local clock before chunk processing
+
                 dev.read(frames);
                 string s = "";
+                
                 for (int i = 0; i < frames.Length; i++)
                 {
-                    s += frames[i].analog[0];
-                    s += " ";
-                    sample[0,i] = frames[i].analog[0];
+                    int auxSampleIndexer = 0; // This variable helps manage the sample array for the various channels that are currently being used.
+
+                    // Manage the ECG Values
+                    if (ecg)
+                    {
+                        s += frames[i].analog[0];
+                        s += " ";
+                        sample[i, auxSampleIndexer] = frames[i].analog[0];
+
+                        auxSampleIndexer += 1;
+                    }
+
+                    // Manage the EDA Values
+                    if (eda)
+                    {
+                        s += frames[i].analog[1];
+                        s += " ";
+                        sample[i, auxSampleIndexer] = frames[i].analog[1];
+
+                        auxSampleIndexer += 1;
+                    }
+
+                    // Manage the Respiration Values
+                    if (resp)
+                    {
+                        s += frames[i].analog[2];
+                        s += " ";
+                        sample[i, auxSampleIndexer] = frames[i].analog[2];
+
+                        auxSampleIndexer += 1;
+                    }
                 }
 
                 s += "  LENGTH = " + frames.Length;
@@ -133,7 +175,9 @@ namespace BitalinoRecorder
                     new UpdateStreamBoxCallback(this.AppendStreamTextBox), 
                     new object[] { s });
 
-                lslout.push_chunk(sample,liblsl.local_clock()); // Push the Values through Lab Stream Layer
+                double end_clock = liblsl.local_clock(); // Record local clock after chunk processing
+
+                lslout.push_chunk( sample, (end_clock+start_clock)/2.0 ); // Push the chunk through LabStream Layer using the average time between start and end
             }
             dev.stop();
             streamingOutputBox.Dispatcher.Invoke(
@@ -144,7 +188,7 @@ namespace BitalinoRecorder
         private void connectButton_Click(object sender, RoutedEventArgs e)
         {
             // Connect user selected device if not device is currently connected
-            if(BlinoDeviceList.SelectedValue != null && connected_device == null)
+            if(BlinoDeviceList.SelectedValue != null && connected_device == null && lslChannelCount > 0)
             {
                 macAddress = BlinoDeviceList.SelectedValue.ToString().Split('-')[0];
 
@@ -162,20 +206,24 @@ namespace BitalinoRecorder
             {
                 infoOutputBox.Text = "Existing Device (" + macAddress + ") Already Connected";
             }
+            else if(lslChannelCount == 0)
+            {
+                infoOutputBox.Text = "Error! Atleast one stream must be selected in order to start streaming.";
+            }
         }
 
         private void LinkLabStreamingLayer()
         {
             if (lslOutlet == null)
             {
+                sampling_rate = (int)SamplingRateListBox.SelectedItem;
                 // This is How I Link the Output Stream!
-                lslStreamInfo = new liblsl.StreamInfo(lslStreamName, lslStreamType, lslChannelCount, sampling_rate, lslChannelFormat, guid);
+                lslStreamInfo = new liblsl.StreamInfo(lslStreamName + "-" + idTextBox.Text, lslStreamType, lslChannelCount, sampling_rate, lslChannelFormat, guid + "-" + idTextBox.Text);
                 lslOutlet = new liblsl.StreamOutlet(lslStreamInfo);
 
-                infoOutputBox.Text += "\nLinked to Lab Streaming Layer -- Ready to Stream";
+                infoOutputBox.Text += "\nLinked to Lab Streaming Layer\nReady to Stream at " + sampling_rate + " Hz\n" + lslChannelCount + " Channels are Open";
             }
         }
-
 
         private void OnWindowClosing(object sender, System.EventArgs e)
         {
@@ -195,10 +243,22 @@ namespace BitalinoRecorder
             if(device != null)
             {
                 startStreamingButton.IsEnabled = true;
+
+                // It is important to disable these options once the bitalino is connected.
+                idTextBox.IsReadOnly = true;
+                ECGCheck.IsEnabled = false;
+                EDACheck.IsEnabled = false;
+                RespCheck.IsEnabled = false;
+                SamplingRateListBox.IsEnabled = false;
             }
             else
             {
                 startStreamingButton.IsEnabled = false;
+                idTextBox.IsReadOnly = false;
+                ECGCheck.IsEnabled = true;
+                EDACheck.IsEnabled = true;
+                RespCheck.IsEnabled = true;
+                SamplingRateListBox.IsEnabled = true;
             }
         }
 
@@ -220,12 +280,52 @@ namespace BitalinoRecorder
 
                 // Run Thread
                 startStreamingButton.Content = "Stop Streaming";
-                streamingThread = new Thread(() => StreamData(connected_device,lslOutlet)); // Pass the connected device argument to the thread
+
+
+                bool ecgVal = ECGCheck.IsChecked.Value;
+                bool edaVal = EDACheck.IsChecked.Value;
+                bool respVal = RespCheck.IsChecked.Value;
+                streamingThread = new Thread(() => StreamData(connected_device,lslOutlet, 
+                    ecgVal, edaVal, respVal)); // Pass the connected device argument to the thread
+
                 streamingThread.Start(); // Start Streaming
             }
         }
 
-        
+        private void ECGCheck_Checked(object sender, RoutedEventArgs e)
+        {
+            if (ECGCheck.IsChecked.Value)
+            {
+                lslChannelCount += 1;
+            }
+            else
+            {
+                lslChannelCount -= 1;
+            }
+        }
 
+        private void EDACheck_Checked(object sender, RoutedEventArgs e)
+        {
+            if (EDACheck.IsChecked.Value)
+            {
+                lslChannelCount += 1;
+            }
+            else
+            {
+                lslChannelCount -= 1;
+            }
+        }
+
+        private void RespCheck_Checked(object sender, RoutedEventArgs e)
+        {
+            if (RespCheck.IsChecked.Value)
+            {
+                lslChannelCount += 1;
+            }
+            else
+            {
+                lslChannelCount -= 1;
+            }
+        }
     }
 }
