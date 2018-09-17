@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabStreamLayer-RandomSignal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitalinoRecorder", "BitalinoRecorder\BitalinoRecorder.csproj", "{B16D8483-3186-4929-A667-7E62EAF7435C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelRealSense-FrameCapture", "IntelRealSense-FrameCapture\IntelRealSense-FrameCapture.csproj", "{D6431248-1CB1-4045-BCB8-470E789CD135}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{B16D8483-3186-4929-A667-7E62EAF7435C}.Release|x64.Build.0 = Release|Any CPU
 		{B16D8483-3186-4929-A667-7E62EAF7435C}.Release|x86.ActiveCfg = Release|Any CPU
 		{B16D8483-3186-4929-A667-7E62EAF7435C}.Release|x86.Build.0 = Release|Any CPU
+		{D6431248-1CB1-4045-BCB8-470E789CD135}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6431248-1CB1-4045-BCB8-470E789CD135}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6431248-1CB1-4045-BCB8-470E789CD135}.Debug|x64.ActiveCfg = Debug|x64
+		{D6431248-1CB1-4045-BCB8-470E789CD135}.Debug|x64.Build.0 = Debug|x64
+		{D6431248-1CB1-4045-BCB8-470E789CD135}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D6431248-1CB1-4045-BCB8-470E789CD135}.Debug|x86.Build.0 = Debug|Any CPU
+		{D6431248-1CB1-4045-BCB8-470E789CD135}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6431248-1CB1-4045-BCB8-470E789CD135}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6431248-1CB1-4045-BCB8-470E789CD135}.Release|x64.ActiveCfg = Release|Any CPU
+		{D6431248-1CB1-4045-BCB8-470E789CD135}.Release|x64.Build.0 = Release|Any CPU
+		{D6431248-1CB1-4045-BCB8-470E789CD135}.Release|x86.ActiveCfg = Release|Any CPU
+		{D6431248-1CB1-4045-BCB8-470E789CD135}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
