@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -49,6 +50,9 @@ namespace Intel.RealSense
 
         private string[] sample; // Data Samples to be Pushed into LSL
 
+        private const string defaultDirectory = "Recordings"; // Where the recordings are Stashed.
+        private string fileRecording = "";
+
         private void UploadImage(Image img, VideoFrame frame)
         {
             Dispatcher.Invoke(new Action(() =>
@@ -70,74 +74,36 @@ namespace Intel.RealSense
                 img.Source = imgSrc;
             }));
         }
-
-
-        // Code Taken Directly from the LibRealSense 2 Examples -- Captures and Displays Depth and RGB Camera. -- 
-        // Phil Notes -- Curently it also records automatically, to ease the protoccol probably only start recording once it is linked to LSL...
+        
         public CaptureWindow()
         {
-            //Log.ToFile(LogSeverity.Debug, "1.log");
+            InitializeComponent();
+        }
 
+
+        /**
+         * NOTES 
+         * Curently it records immediately after linking the program with LabStreamLayer. 
+         * There might be a better solution, but we don't want to increase the number of button presses for the protoccol. It is probably better to record more than to forget pressing 
+         * the record button before an experiment. 
+         * 
+         * **/
+        // Code Taken Directly from the LibRealSense 2 Examples -- Captures and Displays Depth and RGB Camera.
+        private void startRecordingProcess()
+        {
             try
             {
                 pipeline = new Pipeline();
                 colorizer = new Colorizer();
 
                 var cfg = new Config();
-                cfg.EnableStream(Stream.Depth, 640, 480, Format.Z16, 30);
-                cfg.EnableStream(Stream.Color, 640, 480, Format.Rgb8, 30);
+                cfg.EnableStream(Stream.Depth, 640, 480);
+                cfg.EnableStream(Stream.Color, 640, 480);
 
 
-                cfg.EnableRecordToFile("Test.bag");
-                var profile = pipeline.Start(cfg);
-                
+                cfg.EnableRecordToFile(fileRecording);
 
-                var software_dev = new SoftwareDevice();
-                var depth_sensor = software_dev.AddSensor("Depth");
-                var depth_profile = depth_sensor.AddVideoStream(new VideoStream
-                {
-                    type = Stream.Depth,
-                    index = 0,
-                    uid = 100,
-                    width = 640,
-                    height = 480,
-                    fps = 30,
-                    bpp = 2,
-                    fmt = Format.Z16,
-                    intrinsics = (profile.GetStream(Stream.Depth) as VideoStreamProfile).GetIntrinsics()
-                });
-                var color_sensor = software_dev.AddSensor("Color");
-                var color_profile = color_sensor.AddVideoStream(new VideoStream
-                {
-                    type = Stream.Color,
-                    index = 0,
-                    uid = 101,
-                    width = 640,
-                    height = 480,
-                    fps = 30,
-                    bpp = 2,
-                    fmt = Format.Z16,
-                    intrinsics = (profile.GetStream(Stream.Color) as VideoStreamProfile).GetIntrinsics()
-                });
-
-                // Note about the Syncer: If actual FPS is significantly different from reported FPS in AddVideoStream
-                // this can confuse the syncer and prevent it from producing synchronized pairs
-                software_dev.SetMatcher(Matchers.Default);
-
-                var sync = new Syncer();
-
-                depth_sensor.Open(depth_profile);
-                color_sensor.Open(color_profile);
-
-                depth_sensor.Start(f =>
-                {
-                    sync.SubmitFrame(f);
-                    //Debug.WriteLine("D");
-                });
-                color_sensor.Start(f => {
-                    sync.SubmitFrame(f);
-                    //Debug.WriteLine("C");
-                });
+                pipeline.Start(cfg);
 
                 var token = tokenSource.Token;
 
@@ -150,49 +116,29 @@ namespace Intel.RealSense
 
                         var depth_frame = frames.DepthFrame;
                         var color_frame = frames.ColorFrame;
-
-                        var bytes = new byte[depth_frame.Stride * depth_frame.Height];
-                        depth_frame.CopyTo(bytes);
-                        depth_sensor.AddVideoFrame(bytes, depth_frame.Stride, 2, depth_frame.Timestamp,
-                            depth_frame.TimestampDomain, (int)depth_frame.Number,
-                            depth_profile);
-
-                        bytes = new byte[color_frame.Stride * color_frame.Height];
-                        color_frame.CopyTo(bytes);
-                        color_sensor.AddVideoFrame(bytes, color_frame.Stride, 2, color_frame.Timestamp,
-                            color_frame.TimestampDomain, (int)color_frame.Number,
-                            color_profile);
+                        var colorized_depth = colorizer.Colorize(depth_frame);
                         
-                        depth_frame.Dispose();
-                        color_frame.Dispose();
-                        frames.Dispose();
-
-                        var new_frames = sync.WaitForFrames();
-                        if (new_frames.Count == 2)
+                        if (lslOutlet != null)
                         {
-                            depth_frame = new_frames.DepthFrame;
-                            color_frame = new_frames.ColorFrame;
-
-                            // If LSL Connected Start Pushing the Frame Data.
-                            if (lslOutlet != null)
-                            {
-                                // Do LSL Streaming Here
-                                sample[0] = "" + depth_frame.Number + "_" + depth_frame.Timestamp;
-                                sample[1] = "" + color_frame.Number + "_" + depth_frame.Timestamp;
-                                lslOutlet.push_sample(sample, liblsl.local_clock());
-                            }
-
-                            var colorized_depth = colorizer.Colorize(depth_frame);
-
-                            UploadImage(imgDepth, colorized_depth);
-                            UploadImage(imgColor, color_frame);
-
-                            depth_frame.Dispose();
-                            colorized_depth.Dispose();
-                            color_frame.Dispose();
+                            // Do LSL Streaming Here
+                            sample[0] = "" + depth_frame.Number + "_" + depth_frame.Timestamp;
+                            sample[1] = "" + color_frame.Number + "_" + depth_frame.Timestamp;
+                            lslOutlet.push_sample(sample, liblsl.local_clock());
                         }
-                        new_frames.Dispose();
+
+                        UploadImage(imgDepth, colorized_depth);
+                        UploadImage(imgColor, color_frame);
+
+                        // It is important to pre-emptively dispose of native resources
+                        // to avoid creating bottleneck at finalization stage after GC
+                        // (Also see FrameReleaser helper object in next tutorial)
+                        frames.Dispose();
+                        depth_frame.Dispose();
+                        colorized_depth.Dispose();
+                        color_frame.Dispose();
                     }
+
+                           
                 }, token);
             }
             catch (Exception ex)
@@ -200,8 +146,6 @@ namespace Intel.RealSense
                 MessageBox.Show(ex.Message);
                 Application.Current.Shutdown();
             }
-
-            InitializeComponent();
         }
 
         private void LinkLabStreamingLayer()
@@ -213,9 +157,41 @@ namespace Intel.RealSense
                 lslStreamInfo = new liblsl.StreamInfo(lslStreamName + "-" + idTextBox.Text, lslStreamType, lslChannelCount, sampling_rate, lslChannelFormat, guid + "-" + idTextBox.Text);
                 lslOutlet = new liblsl.StreamOutlet(lslStreamInfo);
 
-                infoTextBox.Text += "\nLinked to Lab Streaming Layer\nNow Streaming Frame Data";
+                infoTextBox.Text += "Linked to Lab Streaming Layer\nNow Streaming Frame Data\n";
             }
+            
+            // Once linked no need for the button functionality so disable it.
+            lslLink.Content = "Camera is Linked";
+            lslLink.IsEnabled = false;
+
+            // Disable the Experiment ID Text Functionality
+            idTextBox.IsEnabled = false;
+
+            checkDirectory();
+
+            startRecordingProcess();
         }
+
+        private void checkDirectory()
+        {
+            if (!Directory.Exists(defaultDirectory))
+            {
+                Directory.CreateDirectory(defaultDirectory);
+            }
+
+            int fileInc = 1;
+            fileRecording = defaultDirectory + "\\" + idTextBox.Text + "_" + fileInc + ".bag";
+
+            while (File.Exists(fileRecording))
+            {
+                fileInc += 1;
+                fileRecording = defaultDirectory + "\\" + idTextBox.Text + "_" + fileInc + ".bag";
+            }
+
+            infoTextBox.Text += "Recording File = " + fileRecording;
+
+        }
+
 
         // Interface Controls Go Here
         private void control_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -229,5 +205,6 @@ namespace Intel.RealSense
             // Link LabStreamLayer
             LinkLabStreamingLayer();
         }
+
     }
 }

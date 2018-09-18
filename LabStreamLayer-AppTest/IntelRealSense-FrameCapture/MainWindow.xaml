@@ -10,10 +10,10 @@
     <Grid>
         <Image x:Name="imgDepth" HorizontalAlignment="Left" Height="500" Margin="75,169,0,0" VerticalAlignment="Top" Width="500"/>
         <Image x:Name="imgColor" HorizontalAlignment="Left" Height="500" Margin="621,169,0,0" VerticalAlignment="Top" Width="500"/>
-        <Button x:Name="lslLink" Content="Link Camera" HorizontalAlignment="Left" Margin="75,50,0,0" VerticalAlignment="Top" Width="134" Height="66" Click="lslLink_Click"/>
-        <TextBox x:Name="infoTextBox" HorizontalAlignment="Left" Height="66" Margin="230,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218"/>
-        <TextBox x:Name="idTextBox" HorizontalAlignment="Left" Height="19" Margin="514,74,0,0" TextWrapping="Wrap" Text="P1" VerticalAlignment="Top" Width="61" TextAlignment="Center"/>
-        <Label x:Name="idTextLabel" Content="Player Exp. Identifier" HorizontalAlignment="Left" Height="24" Margin="482,32,0,0" VerticalAlignment="Top" Width="122"/>
+        <Button x:Name="lslLink" Content="Link Camera" HorizontalAlignment="Left" Margin="49,50,0,0" VerticalAlignment="Top" Width="134" Height="66" Click="lslLink_Click"/>
+        <TextBox x:Name="infoTextBox" HorizontalAlignment="Left" Height="66" Margin="204,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" IsEnabled="False"/>
+        <TextBox x:Name="idTextBox" HorizontalAlignment="Left" Height="21" Margin="501,78,0,0" TextWrapping="Wrap" Text="P1" VerticalAlignment="Top" Width="34" TextAlignment="Center"/>
+        <Label x:Name="idTextLabel" Content="Player Exp. Identifier" HorizontalAlignment="Left" Height="31" Margin="456,41,0,0" VerticalAlignment="Top" Width="119"/>
 
     </Grid>
 </Window>

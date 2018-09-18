@@ -9,6 +9,6 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("bitalino_x64.dll")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("bitalino_x86.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("liblsl64.dll")]
 
 
