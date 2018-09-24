@@ -105,6 +105,13 @@ namespace Intel.RealSense
 
                 pipeline.Start(cfg);
 
+
+                FrameSet frames;
+                DepthFrame depth_frame;
+                VideoFrame color_frame;
+                VideoFrame colorized_depth;
+
+
                 var token = tokenSource.Token;
 
                 var t = Task.Factory.StartNew(() =>
@@ -112,11 +119,10 @@ namespace Intel.RealSense
                     // Main Loop -- 
                     while (!token.IsCancellationRequested)
                     {
-                        var frames = pipeline.WaitForFrames();
-
-                        var depth_frame = frames.DepthFrame;
-                        var color_frame = frames.ColorFrame;
-                        var colorized_depth = colorizer.Colorize(depth_frame);
+                        frames = pipeline.WaitForFrames();
+                        depth_frame = frames.DepthFrame;
+                        color_frame = frames.ColorFrame;
+                        colorized_depth = colorizer.Colorize(depth_frame);
                         
                         if (lslOutlet != null)
                         {
@@ -138,7 +144,8 @@ namespace Intel.RealSense
                         color_frame.Dispose();
                     }
 
-                           
+
+
                 }, token);
             }
             catch (Exception ex)

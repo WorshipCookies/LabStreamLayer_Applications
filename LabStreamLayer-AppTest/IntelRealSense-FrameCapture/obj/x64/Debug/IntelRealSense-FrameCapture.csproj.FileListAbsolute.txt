@@ -4,7 +4,6 @@ D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-Fr
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-FrameCapture\bin\x64\Debug\IntelRealSense-FrameCapture.exe
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-FrameCapture\bin\x64\Debug\IntelRealSense-FrameCapture.pdb
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-FrameCapture\bin\x64\Debug\Intel.RealSense.dll
-D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-FrameCapture\bin\x64\Debug\Intel.RealSense.pdb
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-FrameCapture\obj\x64\Debug\MainWindow.g.cs
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-FrameCapture\obj\x64\Debug\App.g.cs
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-FrameCapture\obj\x64\Debug\IntelRealSense-FrameCapture_Content.g.cs

@@ -57,7 +57,7 @@
   <ItemGroup>
     <Reference Include="Intel.RealSense, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\librealsense\Build\Win64Build_v1\Debug\Intel.RealSense.dll</HintPath>
+      <HintPath>.\Intel.RealSense.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
