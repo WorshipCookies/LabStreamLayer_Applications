@@ -10,5 +10,6 @@
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("liblsl64.dll")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("realsense2.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("accord.dll.config")]
 
 

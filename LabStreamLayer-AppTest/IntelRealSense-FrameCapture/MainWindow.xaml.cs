@@ -16,6 +16,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Intel.RealSense;
 using LSL;
+using Accord.Video.FFMPEG;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace Intel.RealSense
 {
@@ -30,7 +33,6 @@ namespace Intel.RealSense
         private Pipeline pipeline;
         private Colorizer colorizer;
         private CancellationTokenSource tokenSource = new CancellationTokenSource();
-
 
         // Lab Streaming Layer Variables
         /**
@@ -53,7 +55,12 @@ namespace Intel.RealSense
         private const string defaultDirectory = "Recordings"; // Where the recordings are Stashed.
         private string fileRecording = "";
 
-        private void UploadImage(Image img, VideoFrame frame)
+
+        private VideoFileWriter vidWriter_Depth;
+        private VideoFileWriter vidWriter_Color;
+
+
+        private void UploadImage(System.Windows.Controls.Image img, VideoFrame frame)
         {
             Dispatcher.Invoke(new Action(() =>
             {
@@ -64,7 +71,7 @@ namespace Intel.RealSense
 
                 var bs = BitmapSource.Create(frame.Width, frame.Height,
                                   300, 300,
-                                  PixelFormats.Rgb24,
+                                  PixelFormats.Bgr24,
                                   null,
                                   bytes,
                                   frame.Stride);
@@ -79,7 +86,6 @@ namespace Intel.RealSense
         {
             InitializeComponent();
         }
-
 
         /**
          * NOTES 
@@ -97,20 +103,20 @@ namespace Intel.RealSense
                 colorizer = new Colorizer();
 
                 var cfg = new Config();
-                cfg.EnableStream(Stream.Depth, 640, 480);
-                cfg.EnableStream(Stream.Color, 640, 480);
+                cfg.EnableStream(Stream.Depth, 640, 480, Format.Z16,30);
+                cfg.EnableStream(Stream.Color, 640, 480, Format.Bgr8,30);
 
 
-                cfg.EnableRecordToFile(fileRecording);
-
+                //cfg.EnableRecordToFile(fileRecording); // This is now taken care of by FFMPEG
                 pipeline.Start(cfg);
-
 
                 FrameSet frames;
                 DepthFrame depth_frame;
                 VideoFrame color_frame;
                 VideoFrame colorized_depth;
 
+				Bitmap bmpColor;
+				Bitmap bmpDepth;
 
                 var token = tokenSource.Token;
 
@@ -123,16 +129,25 @@ namespace Intel.RealSense
                         depth_frame = frames.DepthFrame;
                         color_frame = frames.ColorFrame;
                         colorized_depth = colorizer.Colorize(depth_frame);
-                        
-                        if (lslOutlet != null)
+
+
+						// FFMPEG Record to File
+						bmpColor = new Bitmap(color_frame.Width, color_frame.Height, color_frame.Stride, System.Drawing.Imaging.PixelFormat.Format24bppRgb, color_frame.Data);
+						vidWriter_Color.WriteVideoFrame(bmpColor);
+
+						bmpDepth = new Bitmap(colorized_depth.Width, colorized_depth.Height, colorized_depth.Stride, System.Drawing.Imaging.PixelFormat.Format24bppRgb, colorized_depth.Data);
+						vidWriter_Depth.WriteVideoFrame(bmpDepth);
+
+						// LSL Process
+						if (lslOutlet != null)
                         {
                             // Do LSL Streaming Here
-                            sample[0] = "" + depth_frame.Number + "_" + depth_frame.Timestamp;
-                            sample[1] = "" + color_frame.Number + "_" + depth_frame.Timestamp;
+                            sample[0] = "" + colorized_depth.Number + "_" + colorized_depth.Timestamp;
+                            sample[1] = "" + color_frame.Number + "_" + color_frame.Timestamp;
                             lslOutlet.push_sample(sample, liblsl.local_clock());
                         }
-
-                        UploadImage(imgDepth, colorized_depth);
+						
+						UploadImage(imgDepth, colorized_depth);
                         UploadImage(imgColor, color_frame);
 
                         // It is important to pre-emptively dispose of native resources
@@ -176,6 +191,8 @@ namespace Intel.RealSense
 
             checkDirectory();
 
+			applyRecordingConfig();
+
             startRecordingProcess();
         }
 
@@ -187,23 +204,60 @@ namespace Intel.RealSense
             }
 
             int fileInc = 1;
-            fileRecording = defaultDirectory + "\\" + idTextBox.Text + "_" + fileInc + ".bag";
+            fileRecording = defaultDirectory + "\\" + idTextBox.Text + "_" + fileInc;
 
-            while (File.Exists(fileRecording))
-            {
-                fileInc += 1;
-                fileRecording = defaultDirectory + "\\" + idTextBox.Text + "_" + fileInc + ".bag";
-            }
+			foreach (string f in Directory.GetFiles(defaultDirectory))
+			{
+				string coreName = f.Split('-')[0];
 
+				if (coreName.Equals(fileRecording))
+				{
+					fileInc += 1;
+					fileRecording = defaultDirectory + "\\" + idTextBox.Text + "_" + fileInc;
+				}
+
+			}
             infoTextBox.Text += "Recording File = " + fileRecording;
 
         }
 
+		private void applyRecordingConfig()
+		{
+			vidWriter_Depth = new VideoFileWriter();
+			vidWriter_Depth.Width = 640;
+			vidWriter_Depth.Height = 480;
+			vidWriter_Depth.VideoCodec = VideoCodec.H264;
+			vidWriter_Depth.VideoOptions["crf"] = "17";
+			vidWriter_Depth.VideoOptions["preset"] = "ultrafast";
+			vidWriter_Depth.Open(fileRecording + "-Depth.avi");
+
+			vidWriter_Color = new VideoFileWriter();
+			vidWriter_Color.Width = 640;
+			vidWriter_Color.Height = 480;
+			vidWriter_Color.VideoCodec = VideoCodec.H264;
+			vidWriter_Color.VideoOptions["crf"] = "17";
+			vidWriter_Color.VideoOptions["preset"] = "ultrafast";
+			vidWriter_Color.Open(fileRecording + "-Color.avi");
+		}
 
         // Interface Controls Go Here
         private void control_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            pipeline.Stop();
+			if (vidWriter_Color != null && vidWriter_Color.IsOpen)
+			{
+				vidWriter_Color.Close();
+			}
+
+			if (vidWriter_Depth != null && vidWriter_Depth.IsOpen)
+			{
+				vidWriter_Depth.Close();
+			}
+
+			if (pipeline != null)
+			{
+				pipeline.Stop();
+			}
+			
             tokenSource.Cancel();
         }
 
@@ -212,6 +266,7 @@ namespace Intel.RealSense
             // Link LabStreamLayer
             LinkLabStreamingLayer();
         }
+
 
     }
 }
