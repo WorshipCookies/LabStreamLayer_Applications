@@ -34,6 +34,8 @@ namespace Intel.RealSense
         private Colorizer colorizer;
         private CancellationTokenSource tokenSource = new CancellationTokenSource();
 
+		private CustomProcessingBlock processBlock;
+
         // Lab Streaming Layer Variables
         /**
          * Identifying Variables: Process ID; Stream Name; Type of Data; Sampling Rate
@@ -58,7 +60,7 @@ namespace Intel.RealSense
 
         private VideoFileWriter vidWriter_Depth;
         private VideoFileWriter vidWriter_Color;
-
+	
 
         private void UploadImage(System.Windows.Controls.Image img, VideoFrame frame)
         {
@@ -84,6 +86,7 @@ namespace Intel.RealSense
         
         public CaptureWindow()
         {
+			
             InitializeComponent();
         }
 
@@ -105,18 +108,58 @@ namespace Intel.RealSense
                 var cfg = new Config();
                 cfg.EnableStream(Stream.Depth, 640, 480, Format.Z16,30);
                 cfg.EnableStream(Stream.Color, 640, 480, Format.Bgr8,30);
-
-
+				
                 //cfg.EnableRecordToFile(fileRecording); // This is now taken care of by FFMPEG
                 pipeline.Start(cfg);
 
-                FrameSet frames;
-                DepthFrame depth_frame;
-                VideoFrame color_frame;
-                VideoFrame colorized_depth;
+				applyRecordingConfig();
 
-				Bitmap bmpColor;
-				Bitmap bmpDepth;
+				processBlock = new CustomProcessingBlock((f, src) =>
+				{
+					using (var releaser = new FramesReleaser())
+					{
+						var frames = FrameSet.FromFrame(f, releaser);
+
+						VideoFrame depth = FramesReleaser.ScopedReturn(releaser, frames.DepthFrame);
+						VideoFrame color = FramesReleaser.ScopedReturn(releaser, frames.ColorFrame);
+
+						var res = src.AllocateCompositeFrame(releaser, depth, color);
+
+						src.FramesReady(res);
+					}
+				});
+
+				processBlock.Start(f =>
+				{
+					using (var releaser = new FramesReleaser())
+					{
+						var frames = FrameSet.FromFrame(f, releaser);
+
+						var depth_frame = FramesReleaser.ScopedReturn(releaser, frames.DepthFrame);
+						var color_frame = FramesReleaser.ScopedReturn(releaser, frames.ColorFrame);
+
+						var colorized_depth = colorizer.Colorize(depth_frame);
+
+						UploadImage(imgDepth, colorized_depth);
+						UploadImage(imgColor, color_frame);
+
+						// Record FFMPEG
+						Bitmap bmpColor = new Bitmap(color_frame.Width, color_frame.Height, color_frame.Stride, System.Drawing.Imaging.PixelFormat.Format24bppRgb, color_frame.Data);
+						vidWriter_Color.WriteVideoFrame(bmpColor);
+
+						Bitmap bmpDepth = new Bitmap(colorized_depth.Width, colorized_depth.Height, colorized_depth.Stride, System.Drawing.Imaging.PixelFormat.Format24bppRgb, colorized_depth.Data);
+						vidWriter_Depth.WriteVideoFrame(bmpDepth);
+
+						if (lslOutlet != null)
+						{
+							// Do LSL Streaming Here
+							sample[0] = "" + colorized_depth.Number + "_" + colorized_depth.Timestamp;
+							sample[1] = "" + color_frame.Number + "_" + color_frame.Timestamp;
+							lslOutlet.push_sample(sample, liblsl.local_clock());
+						}
+					}
+				});
+
 
                 var token = tokenSource.Token;
 
@@ -125,41 +168,11 @@ namespace Intel.RealSense
                     // Main Loop -- 
                     while (!token.IsCancellationRequested)
                     {
-                        frames = pipeline.WaitForFrames();
-                        depth_frame = frames.DepthFrame;
-                        color_frame = frames.ColorFrame;
-                        colorized_depth = colorizer.Colorize(depth_frame);
-
-
-						// FFMPEG Record to File
-						bmpColor = new Bitmap(color_frame.Width, color_frame.Height, color_frame.Stride, System.Drawing.Imaging.PixelFormat.Format24bppRgb, color_frame.Data);
-						vidWriter_Color.WriteVideoFrame(bmpColor);
-
-						bmpDepth = new Bitmap(colorized_depth.Width, colorized_depth.Height, colorized_depth.Stride, System.Drawing.Imaging.PixelFormat.Format24bppRgb, colorized_depth.Data);
-						vidWriter_Depth.WriteVideoFrame(bmpDepth);
-
-						// LSL Process
-						if (lslOutlet != null)
-                        {
-                            // Do LSL Streaming Here
-                            sample[0] = "" + colorized_depth.Number + "_" + colorized_depth.Timestamp;
-                            sample[1] = "" + color_frame.Number + "_" + color_frame.Timestamp;
-                            lslOutlet.push_sample(sample, liblsl.local_clock());
-                        }
-						
-						UploadImage(imgDepth, colorized_depth);
-                        UploadImage(imgColor, color_frame);
-
-                        // It is important to pre-emptively dispose of native resources
-                        // to avoid creating bottleneck at finalization stage after GC
-                        // (Also see FrameReleaser helper object in next tutorial)
-                        frames.Dispose();
-                        depth_frame.Dispose();
-                        colorized_depth.Dispose();
-                        color_frame.Dispose();
+                        using (var frames = pipeline.WaitForFrames())
+						{
+							processBlock.ProcessFrames(frames);
+						}
                     }
-
-
 
                 }, token);
             }
@@ -191,7 +204,7 @@ namespace Intel.RealSense
 
             checkDirectory();
 
-			applyRecordingConfig();
+			//applyRecordingConfig();
 
             startRecordingProcess();
         }
@@ -243,23 +256,13 @@ namespace Intel.RealSense
         // Interface Controls Go Here
         private void control_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-			if (vidWriter_Color != null && vidWriter_Color.IsOpen)
-			{
-				vidWriter_Color.Close();
-			}
-
-			if (vidWriter_Depth != null && vidWriter_Depth.IsOpen)
-			{
-				vidWriter_Depth.Close();
-			}
-
+			tokenSource.Cancel();
+			
 			if (pipeline != null)
 			{
 				pipeline.Stop();
 			}
-			
-            tokenSource.Cancel();
-        }
+		}
 
         private void lslLink_Click(object sender, RoutedEventArgs e)
         {
