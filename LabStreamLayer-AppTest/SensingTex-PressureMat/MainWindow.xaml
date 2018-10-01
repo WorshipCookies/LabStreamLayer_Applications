@@ -5,12 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SensingTex_PressureMat"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="89*"/>
-        </Grid.ColumnDefinitions>
-
-    </Grid>
+        Title="MainWindow" Height="680" Width="800">
+    <Canvas x:Name="pressureNodePanel" HorizontalAlignment="Left" Height="640" VerticalAlignment="Top" Width="640">
+        <Label x:Name="comPortLabel" Content="COM:" Canvas.Left="644" Canvas.Top="21" Width="49" RenderTransformOrigin="0.043,0.55" FontSize="16"/>
+        <Button x:Name="comPortConnectButton" Content="Connect" Canvas.Left="654" Canvas.Top="68" Width="121" Height="36" Click="comPortConnectButton_Click"/>
+        <TextBox x:Name="comPortText" Height="30" Canvas.Left="698" TextWrapping="Wrap" Canvas.Top="21" Width="77" FontSize="20" TextAlignment="Center" PreviewTextInput="NumberValidationTextBox"/>
+    </Canvas>
 </Window>
