@@ -13,3 +13,5 @@ D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-Pressu
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-PressureMat\obj\Debug\SensingTex-PressureMat.csproj.CoreCompileInputs.cache
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-PressureMat\obj\Debug\SensingTex-PressureMat.exe
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-PressureMat\obj\Debug\SensingTex-PressureMat.pdb
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-PressureMat\bin\Debug\liblsl64.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-PressureMat\obj\Debug\SensingTex-PressureMat_Content.g.cs

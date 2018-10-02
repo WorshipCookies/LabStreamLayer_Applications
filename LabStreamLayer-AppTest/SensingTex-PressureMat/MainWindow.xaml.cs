@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
 using System.Text.RegularExpressions;
-using HSVColor;
+using LSL;
 
 namespace SensingTex_PressureMat
 {
@@ -37,10 +37,25 @@ namespace SensingTex_PressureMat
 		public static int MAX_VAL = 4096;
 
 		public static bool isDrawing = false;
-
 		public static bool isConnected = false;
-		
-        public MainWindow()
+
+		/**
+         * Identifying Variables: Process ID; Stream Name; Type of Data; Sampling Rate
+         * **/
+		private const string guid = "B3CA3876-1C8E-4E20-B855-C52B37D94EF4"; // Unique Process ID -- Pre-Generated
+
+		private string lslStreamName = "SensingMat Streamer";
+		private string lslStreamType = "Mat-Signals";
+		private int sampling_rate = 100; // Default Value
+
+		private liblsl.StreamInfo lslStreamInfo;
+		private liblsl.StreamOutlet lslOutlet = null; // The Streaming Outlet
+		private int lslChannelCount = 256; // Number of Channels to Stream by Default
+
+		private const liblsl.channel_format_t lslChannelFormat = liblsl.channel_format_t.cf_double64; // Stream Variable Format
+
+
+		public MainWindow()
         {
 			InitializeComponent();
 
@@ -74,12 +89,33 @@ namespace SensingTex_PressureMat
 
 		public void OnDataSensor(object sender, DataReadyEventArgs e)
 		{
+			// LSL Implementation
+			if (lslOutlet != null)
+				PushDataToLSL(e.Data);
+
 			if (MainWindow.isDrawing == false)
 			{
 				MainWindow.isDrawing = true;
 				Thread paintThread = new Thread(PaintingHeatMap);
 				paintThread.Start(e.Data);
 			}
+		}
+
+		private void PushDataToLSL(object data)
+		{
+			// LSL Data Sender
+			double[,] dataArray = (double[,])data;
+			double[] sample = new double[lslChannelCount];
+			int sampleCounter = 0;
+			for (int r = 0; r < rows; r++)
+			{
+				for (int c = 0; c < cols; c++)
+				{
+					sample[sampleCounter] = dataArray[r, c];
+					sampleCounter++;
+				}
+			}
+			lslOutlet.push_sample(sample);
 		}
 
 		private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
@@ -150,6 +186,15 @@ namespace SensingTex_PressureMat
 						// Succesfully Connected
 						isConnected = true;
 						comPortConnectButton.Content = "Disconnect";
+
+						// LSL KickStart
+						if (lslOutlet == null)
+						{
+							sampling_rate = 100;
+							// This is How I Link the Output Stream!
+							lslStreamInfo = new liblsl.StreamInfo(lslStreamName + "-" + idTextBox.Content, lslStreamType, lslChannelCount, sampling_rate, lslChannelFormat, guid + "-" + idTextBox.Content);
+							lslOutlet = new liblsl.StreamOutlet(lslStreamInfo);
+						}
 					}
 						
 					else
@@ -190,7 +235,6 @@ namespace SensingTex_PressureMat
 
 		}
 
-
 		private Brush CalculateHeatMapColor(int low, int high, int value)
 		{
 			int red = 0;
@@ -223,44 +267,6 @@ namespace SensingTex_PressureMat
 				red = 255; blue = 0; green = 0;
 			}
 			return new SolidColorBrush(Color.FromArgb((byte)255, (byte)red, (byte)green, (byte)blue));
-		}
-
-		public static Color HSVtoRGB(float hue, float saturation, float value, float alpha)
-		{
-			while (hue > 1f) { hue -= 1f; }
-			while (hue < 0f) { hue += 1f; }
-			while (saturation > 1f) { saturation -= 1f; }
-			while (saturation < 0f) { saturation += 1f; }
-			while (value > 1f) { value -= 1f; }
-			while (value < 0f) { value += 1f; }
-			if (hue > 0.999f) { hue = 0.999f; }
-			if (hue < 0.001f) { hue = 0.001f; }
-			if (saturation > 0.999f) { saturation = 0.999f; }
-			if (saturation < 0.001f) { return Color.FromScRgb(value * 255f, value * 255f, value * 255f, alpha); }
-			if (value > 0.999f) { value = 0.999f; }
-			if (value < 0.001f) { value = 0.001f; }
-
-			float h6 = hue * 6f;
-			if (h6 == 6f) { h6 = 0f; }
-			int ihue = (int)(h6);
-			float p = value * (1f - saturation);
-			float q = value * (1f - (saturation * (h6 - (float)ihue)));
-			float t = value * (1f - (saturation * (1f - (h6 - (float)ihue))));
-			switch (ihue)
-			{
-				case 0:
-					return Color.FromScRgb(value, t, p, alpha);
-				case 1:
-					return Color.FromScRgb(q, value, p, alpha);
-				case 2:
-					return Color.FromScRgb(p, value, t, alpha);
-				case 3:
-					return Color.FromScRgb(p, q, value, alpha);
-				case 4:
-					return Color.FromScRgb(t, p, value, alpha);
-				default:
-					return Color.FromScRgb(value, p, q, alpha);
-			}
 		}
 
 	}
