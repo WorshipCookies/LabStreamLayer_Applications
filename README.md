@@ -16,6 +16,10 @@ This application is capable of recording several channels from the Bitalino Devi
 
 This application sends the specific frame data to LabRecorder during recording. This allows to synchronize recordings during post-processing, by knowing exactly the frames of a particular event and where to process the video. Currently the recordings are in raw data, which can ocupy a large amount of space. To process the video recordings check the librealsense SDK (e.g. rs-convert).
 
+# Sensing Tex Pressure Mat Application
+
+This application ties directly into the SensingTex Mat sensor device. It sends each pressure sensor value of the device (256 channels) through Lab Streaming Layer. Similarly to the other applications of this project, to fully take advandage of this code it is necessary to run it in parallel with LabRecorder and link this app to it.
+
 # AppTest
 
 This is a simple application that was used to do initial tests on LabStreaming Layer. It sends custom messages (markers) to LabRecorder whenever the user presses the send button.

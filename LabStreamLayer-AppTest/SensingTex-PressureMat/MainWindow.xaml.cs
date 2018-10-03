@@ -46,11 +46,11 @@ namespace SensingTex_PressureMat
 
 		private string lslStreamName = "SensingMat Streamer";
 		private string lslStreamType = "Mat-Signals";
-		private int sampling_rate = 100; // Default Value
+		private double sampling_rate = 100.0; // Default Value
 
 		private liblsl.StreamInfo lslStreamInfo;
 		private liblsl.StreamOutlet lslOutlet = null; // The Streaming Outlet
-		private int lslChannelCount = 256; // Number of Channels to Stream by Default
+		private int lslChannelCount = 256; // Number of Channels to Stream by Default (The Mat Contains 256 Sensors)
 
 		private const liblsl.channel_format_t lslChannelFormat = liblsl.channel_format_t.cf_double64; // Stream Variable Format
 
@@ -192,7 +192,7 @@ namespace SensingTex_PressureMat
 						{
 							sampling_rate = 100;
 							// This is How I Link the Output Stream!
-							lslStreamInfo = new liblsl.StreamInfo(lslStreamName + "-" + idTextBox.Content, lslStreamType, lslChannelCount, sampling_rate, lslChannelFormat, guid + "-" + idTextBox.Content);
+							lslStreamInfo = new liblsl.StreamInfo(lslStreamName + "-" + idTextBox.Text, lslStreamType, lslChannelCount, sampling_rate, lslChannelFormat, guid + "-" + idTextBox.Text);
 							lslOutlet = new liblsl.StreamOutlet(lslStreamInfo);
 						}
 					}
