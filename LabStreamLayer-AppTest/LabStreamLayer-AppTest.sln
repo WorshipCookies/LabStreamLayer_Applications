@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelRealSense-FrameCapture
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensingTex-PressureMat", "SensingTex-PressureMat\SensingTex-PressureMat.csproj", "{16DBC405-570B-474C-8AC0-8EAA7FBA2E9E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmpaticaE4-Recorder", "EmpaticaE4-Recorder\EmpaticaE4-Recorder.csproj", "{F4D32D03-D632-4013-A74D-C10C3900B3D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{16DBC405-570B-474C-8AC0-8EAA7FBA2E9E}.Release|x64.Build.0 = Release|Any CPU
 		{16DBC405-570B-474C-8AC0-8EAA7FBA2E9E}.Release|x86.ActiveCfg = Release|Any CPU
 		{16DBC405-570B-474C-8AC0-8EAA7FBA2E9E}.Release|x86.Build.0 = Release|Any CPU
+		{F4D32D03-D632-4013-A74D-C10C3900B3D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4D32D03-D632-4013-A74D-C10C3900B3D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4D32D03-D632-4013-A74D-C10C3900B3D7}.Debug|x64.ActiveCfg = Debug|x64
+		{F4D32D03-D632-4013-A74D-C10C3900B3D7}.Debug|x64.Build.0 = Debug|x64
+		{F4D32D03-D632-4013-A74D-C10C3900B3D7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F4D32D03-D632-4013-A74D-C10C3900B3D7}.Debug|x86.Build.0 = Debug|Any CPU
+		{F4D32D03-D632-4013-A74D-C10C3900B3D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4D32D03-D632-4013-A74D-C10C3900B3D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4D32D03-D632-4013-A74D-C10C3900B3D7}.Release|x64.ActiveCfg = Release|Any CPU
+		{F4D32D03-D632-4013-A74D-C10C3900B3D7}.Release|x64.Build.0 = Release|Any CPU
+		{F4D32D03-D632-4013-A74D-C10C3900B3D7}.Release|x86.ActiveCfg = Release|Any CPU
+		{F4D32D03-D632-4013-A74D-C10C3900B3D7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

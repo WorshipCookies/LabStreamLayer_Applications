@@ -1,0 +1,15 @@
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Debug\EmpaticaE4-Recorder.exe.config
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Debug\EmpaticaE4-Recorder.exe
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Debug\EmpaticaE4-Recorder.pdb
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\obj\x64\Debug\EmpaticaE4-Recorder.csprojAssemblyReference.cache
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\obj\x64\Debug\MainWindow.g.cs
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\obj\x64\Debug\App.g.cs
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\obj\x64\Debug\EmpaticaE4-Recorder_MarkupCompile.cache
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\obj\x64\Debug\EmpaticaE4-Recorder_MarkupCompile.lref
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\obj\x64\Debug\MainWindow.baml
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\obj\x64\Debug\EmpaticaE4-Recorder.g.resources
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\obj\x64\Debug\EmpaticaE4_Recorder.Properties.Resources.resources
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\obj\x64\Debug\EmpaticaE4-Recorder.csproj.GenerateResource.cache
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\obj\x64\Debug\EmpaticaE4-Recorder.csproj.CoreCompileInputs.cache
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\obj\x64\Debug\EmpaticaE4-Recorder.exe
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\obj\x64\Debug\EmpaticaE4-Recorder.pdb
