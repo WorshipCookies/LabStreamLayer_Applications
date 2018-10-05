@@ -17,6 +17,8 @@
         <CheckBox x:Name="TempStreamBox" Content="Skin Temperature" HorizontalAlignment="Left" Margin="210,98,0,0" VerticalAlignment="Top" IsChecked="True" Checked="SubscribeTemp" Unchecked="SubscribeTemp"/>
         <CheckBox x:Name="IBIStreamBox" Content="IBI" HorizontalAlignment="Left" Margin="210,118,0,0" VerticalAlignment="Top" IsChecked="True" Checked="SubscribeIBI" Unchecked="SubscribeIBI"/>
         <Label x:Name="StreamLabel" Content="Streams:" HorizontalAlignment="Left" Height="23" Margin="201,30,0,0" VerticalAlignment="Top" Width="55"/>
+        <Label x:Name="playerIDLabel" Content="Player ID:" HorizontalAlignment="Left" Margin="24,20,0,0" VerticalAlignment="Top" Height="29" Width="61"/>
+        <TextBox x:Name="playerIDTextBox" HorizontalAlignment="Left" Height="23" Margin="90,24,0,0" TextWrapping="Wrap" Text="P1" VerticalAlignment="Top" Width="23"/>
 
     </Grid>
 </Window>

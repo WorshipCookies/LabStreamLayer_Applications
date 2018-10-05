@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using LSL;
 
 namespace EmpaticaE4_Recorder
 {
@@ -27,7 +28,7 @@ namespace EmpaticaE4_Recorder
 		/// <summary>
 		/// Empatica Variables
 		/// </summary>
-		// The port number for the remote device.
+		// The port number for the remote device. (Using the default values work)
 		private string ServerAddress = "127.0.0.1";
 		private int ServerPort = 28000;
 
@@ -52,7 +53,8 @@ namespace EmpaticaE4_Recorder
 		private static bool empaticaConnected = false;
 
 
-
+		// LabStreaming Layer Variables
+		private LSLStreamingBVP lslBVPOutlet;
 
 		/// <summary>
 		/// UI Interface Variables
@@ -288,36 +290,57 @@ namespace EmpaticaE4_Recorder
 			{
 				if (msg != null)
 				{
+					// Sometimes the Message comes with multiple lines -- Check and parse it effective
+					string[] lineParser = msg.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
-					PushMsgToUI(msg);
-
-					string[] parser = msg.Split(' ');
-
-					// If it is a standard response
-					if (parser[0] == "R")
+					foreach(string line in lineParser)
 					{
-						if (parser[1] == "device_list")
-						{
-							// Construct a Device List
-							BuildVisualListDelegate bv = new BuildVisualListDelegate(BuildVisualList);
-							IDDeviceList.Dispatcher.Invoke(bv, new object[] { msg });
-						}
-						else if (parser[1] == "device_connect")
-						{
-							PushMsgToUI(msg);
-							MainWindow.empaticaConnected = true;
-							UpdateUIOnDeviceConnectDelegate dl = new UpdateUIOnDeviceConnectDelegate(UpdateUIOnDeviceConnect);
-							this.Dispatcher.Invoke(dl, new object[] { true });
+						string[] parser = line.Split(' ');
 
-							// Subscribe to Selected Streams
-							InitializeStreamSubscription();
-						}
-						else if (parser[1] == "device_disconnect")
+						// If it is a standard response
+						if (parser[0] == "R")
 						{
-							PushMsgToUI(msg);
-							MainWindow.empaticaConnected = false;
-							UpdateUIOnDeviceConnectDelegate dl = new UpdateUIOnDeviceConnectDelegate(UpdateUIOnDeviceConnect);
-							this.Dispatcher.Invoke(dl, new object[] { false });
+							if (parser[1] == "device_list")
+							{
+								// Construct a Device List
+								BuildVisualListDelegate bv = new BuildVisualListDelegate(BuildVisualList);
+								IDDeviceList.Dispatcher.Invoke(bv, new object[] { line });
+							}
+							else if (parser[1] == "device_connect")
+							{
+								PushMsgToUI(line);
+								MainWindow.empaticaConnected = true;
+								UpdateUIOnDeviceConnectDelegate dl = new UpdateUIOnDeviceConnectDelegate(UpdateUIOnDeviceConnect);
+								this.Dispatcher.Invoke(dl, new object[] { true });
+
+								// Subscribe to Selected Streams
+								InitializeStreamSubscription();
+							}
+							else if (parser[1] == "device_disconnect")
+							{
+								PushMsgToUI(line);
+								MainWindow.empaticaConnected = false;
+								UpdateUIOnDeviceConnectDelegate dl = new UpdateUIOnDeviceConnectDelegate(UpdateUIOnDeviceConnect);
+								this.Dispatcher.Invoke(dl, new object[] { false });
+							}
+							else if (parser[1] == "device_subscribe")
+							{
+								if (parser[2] == "bvp")
+								{
+									LSLSubscribe_BVP();
+								}
+							}
+						}
+						else
+						{
+							if (parser[0] == "E4_Bvp")
+							{
+								// Treat GSR Signal Here
+								double timestamp = Convert.ToDouble(parser[1]);
+								double bvpValue = Convert.ToDouble(parser[2]);
+								lslBVPOutlet.PushSample(bvpValue, timestamp);
+								PushMsgToUI(line);
+							}
 						}
 					}
 				}
@@ -535,6 +558,13 @@ namespace EmpaticaE4_Recorder
 					UnsubscribeStream("IBI");
 				}
 			}
+		}
+
+		// Lab Streaming Layer Functions
+		 
+		private void LSLSubscribe_BVP()
+		{
+			lslBVPOutlet = new LSLStreamingBVP(playerIDTextBox.Dispatcher.Invoke(() => { return playerIDTextBox.Text; }));
 		}
 	}
 }
