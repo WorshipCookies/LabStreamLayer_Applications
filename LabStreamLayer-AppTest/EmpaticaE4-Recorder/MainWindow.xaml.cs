@@ -39,6 +39,7 @@ namespace EmpaticaE4_Recorder
 		// The response from the remote device.
 		private static String _response = String.Empty;
 		private static Queue<String> sendMsgQueue = new Queue<String>();
+		private static Queue<String> receiveMsgQueue = new Queue<string>();
 
 		// Socket Info
 		private IPHostEntry ipHostInfo;
@@ -47,7 +48,11 @@ namespace EmpaticaE4_Recorder
 		private Socket client;
 
 		private static bool isConnected = false;
+		private static bool isReceiving = false;
 		private static bool empaticaConnected = false;
+
+
+
 
 		/// <summary>
 		/// UI Interface Variables
@@ -56,20 +61,28 @@ namespace EmpaticaE4_Recorder
 
 		public MainWindow()
 		{
-			//OnResponseChange += ParseEmpaticaResponse;
 			InitializeComponent();
 			this.Closed += new EventHandler(OnWindowClosing);
 
-			Thread th = new Thread(connectEmpatica);
-			th.Start();
+			Thread th_sender = new Thread(ConnectEmpaticaServer);
+			th_sender.Name = "Sender Thread";
+			th_sender.Start();
+
+			Thread th_receiver = new Thread(CheckingServerResponse);
+			th_receiver.Name = "Receiver Thread";
+			th_receiver.Start();
 		}
 
 		private void ConnectDevice_Click(object sender, RoutedEventArgs e)
 		{
-			if(IDDeviceList.SelectedValue != null)
+			if(IDDeviceList.SelectedValue != null && !empaticaConnected)
 			{
 				string id = (string)IDDeviceList.SelectedValue;
-				connectEmpaticaDevice(id);
+				ConnectEmpaticaDevice(id);
+			}
+			else if (empaticaConnected)
+			{
+				DisconnectEmpaticaDevice();
 			}
 		}
 
@@ -77,7 +90,13 @@ namespace EmpaticaE4_Recorder
 		{
 			if (isConnected)
 			{
+				if(empaticaConnected)
+					DisconnectEmpaticaDevice();
 				isConnected = false;
+			}
+			if (isReceiving)
+			{
+				isReceiving = false;
 			}
 		}
 		
@@ -96,7 +115,10 @@ namespace EmpaticaE4_Recorder
 		/// <summary>
 		/// Empatica E4 Methods
 		/// </summary>
-		private void connectEmpatica()
+		/// 
+
+		// This is the principal method for connecting to the server and subsequently communicating with it (Send/Receive). 
+		private void ConnectEmpaticaServer()
 		{
 			// Connect to a remote device.
 			try
@@ -118,7 +140,7 @@ namespace EmpaticaE4_Recorder
 
 				isConnected = true;
 
-				getDeviceList();
+				GetDeviceList(); // Obtain Current List of Devices
 				while (isConnected)
 				{
 					if(sendMsgQueue.Count > 0)
@@ -128,8 +150,6 @@ namespace EmpaticaE4_Recorder
 						SendDone.WaitOne();
 						Receive(client);
 						ReceiveDone.WaitOne();
-
-						PushMsgToUI(msg);
 					}
 				}
 			}
@@ -246,42 +266,80 @@ namespace EmpaticaE4_Recorder
 
 		private void HandleResponseFromEmpaticaBLEServer(string response)
 		{
-			PushMsgToUI(response);
-			ParseEmpaticaResponse(response);
+			receiveMsgQueue.Enqueue(response);
 		}
 
+		private void CheckingServerResponse()
+		{
+			isReceiving = true;
+			while (isReceiving)
+			{
+				if (receiveMsgQueue.Count > 0)
+				{
+					ParseEmpaticaResponse(receiveMsgQueue.Dequeue());
+				}
+			}
+		}
+
+		// This function parses the server responses obtained from the Empatica Server
 		private void ParseEmpaticaResponse(String msg)
 		{
-			//PushMsgToUI(msg);
-
 			if (isConnected)
 			{
-				string[] parser = msg.Split(' ');
-
-				// If it is a standard response
-				if(parser[0] == "R")
+				if (msg != null)
 				{
-					if(parser[1] == "device_list")
+
+					PushMsgToUI(msg);
+
+					string[] parser = msg.Split(' ');
+
+					// If it is a standard response
+					if (parser[0] == "R")
 					{
-						// Construct a Device List
-						BuildVisualListDelegate bv = new BuildVisualListDelegate(buildVisualList);
-						IDDeviceList.Dispatcher.Invoke(bv, new object[] { msg });
-					}
-					else if (parser[1] == "device_connect")
-					{
-						PushMsgToUI(msg);
-						empaticaConnected = true;
-					}
-					else if (parser[1] == "device_connect")
-					{
-						PushMsgToUI(msg);
-						empaticaConnected = false;
+						if (parser[1] == "device_list")
+						{
+							// Construct a Device List
+							BuildVisualListDelegate bv = new BuildVisualListDelegate(BuildVisualList);
+							IDDeviceList.Dispatcher.Invoke(bv, new object[] { msg });
+						}
+						else if (parser[1] == "device_connect")
+						{
+							PushMsgToUI(msg);
+							MainWindow.empaticaConnected = true;
+							UpdateUIOnDeviceConnectDelegate dl = new UpdateUIOnDeviceConnectDelegate(UpdateUIOnDeviceConnect);
+							this.Dispatcher.Invoke(dl, new object[] { true });
+
+							// Subscribe to Selected Streams
+							InitializeStreamSubscription();
+						}
+						else if (parser[1] == "device_disconnect")
+						{
+							PushMsgToUI(msg);
+							MainWindow.empaticaConnected = false;
+							UpdateUIOnDeviceConnectDelegate dl = new UpdateUIOnDeviceConnectDelegate(UpdateUIOnDeviceConnect);
+							this.Dispatcher.Invoke(dl, new object[] { false });
+						}
 					}
 				}
 			}
 		}
 
-		private void getDeviceList()
+		// Connect/Disconnect to the Empatica Device currently connected to the server.
+		private void ConnectEmpaticaDevice(string deviceID)
+		{
+			string str = "device_connect " + deviceID + Environment.NewLine;
+			sendMsgQueue.Enqueue(str);
+		}
+
+		// This function serves exclusively to disconnect, in situations where the program crashes or the user exits the Application.
+		private void DisconnectEmpaticaDevice()
+		{
+			string str = "device_disconnect" + Environment.NewLine;
+			sendMsgQueue.Enqueue(str);
+		}
+
+		// Query Server for Connected Devices
+		private void GetDeviceList()
 		{
 			if (isConnected)
 			{
@@ -290,23 +348,12 @@ namespace EmpaticaE4_Recorder
 			}
 		}
 
-		private void connectEmpaticaDevice(string deviceID)
-		{
-			string str;
-			if (!empaticaConnected)
-			{
-				str = "device_connect " + deviceID + Environment.NewLine;
-			}
-			else
-			{
-				str = "device_disconnect" + Environment.NewLine;
-			}
-			sendMsgQueue.Enqueue(str);
-		}
-
+		// Build the List of Devices obtained from the Server into the UI List
 		private delegate void BuildVisualListDelegate(string strList);
-		private void buildVisualList(string strList)
+		private void BuildVisualList(string strList)
 		{
+			IDDeviceList.Items.Clear();
+
 			string[] parser = strList.Split('|');
 
 			for(int i = 1; i < parser.Length; i++)
@@ -316,7 +363,178 @@ namespace EmpaticaE4_Recorder
 				IDDeviceList.Items.Add(listParser[1]);
 				
 			}
-			IDDeviceList.SelectedIndex = 1;
+			if(IDDeviceList.Items.Count > 0)
+			{
+				IDDeviceList.SelectedIndex = 0;
+			}
+		}
+
+		// Allows to Refresh the available device list currently connected to the server.
+		private void RefreshDeviceListButton_Click(object sender, RoutedEventArgs e)
+		{
+			GetDeviceList();
+		}
+
+		private delegate void UpdateUIOnDeviceConnectDelegate(bool isConnect);
+		private void UpdateUIOnDeviceConnect(bool isConnect)
+		{
+			if (isConnect)
+			{
+				//ConnectDevice.Content = "Disconnect Device";
+
+				// Due to a bug in the Empatica API, it is better to disable this button completely. 
+				// Once a device is disconnected, it raises an exception when trying to reconnect to another
+				ConnectDevice.IsEnabled = false; 
+				IDDeviceList.IsEnabled = false;
+			}
+			else
+			{
+				ConnectDevice.Content = "Connect Device";
+				IDDeviceList.IsEnabled = true;
+			}
+		}
+
+		// SUBSCRIBE STREAM RADIO BUTTON UI
+
+		private void SubscribeStream(string streamType)
+		{
+			if(streamType == "BVP")
+			{
+				string s = "device_subscribe bvp ON" + Environment.NewLine;
+				sendMsgQueue.Enqueue(s);
+			}
+			else if(streamType == "GSR")
+			{
+				string s = "device_subscribe gsr ON" + Environment.NewLine;
+				sendMsgQueue.Enqueue(s);
+			}
+			else if (streamType == "TMP")
+			{
+				string s = "device_subscribe tmp ON" + Environment.NewLine;
+				sendMsgQueue.Enqueue(s);
+			}
+			else if (streamType == "IBI")
+			{
+				string s = "device_subscribe ibi ON" + Environment.NewLine;
+				sendMsgQueue.Enqueue(s);
+			}
+		}
+
+		private void UnsubscribeStream(string streamType)
+		{
+			if (streamType == "BVP")
+			{
+				string s = "device_subscribe bvp OFF" + Environment.NewLine;
+				sendMsgQueue.Enqueue(s);
+			}
+			else if (streamType == "GSR")
+			{
+				string s = "device_subscribe gsr OFF" + Environment.NewLine;
+				sendMsgQueue.Enqueue(s);
+			}
+			else if (streamType == "TMP")
+			{
+				string s = "device_subscribe tmp OFF" + Environment.NewLine;
+				sendMsgQueue.Enqueue(s);
+			}
+			else if (streamType == "IBI")
+			{
+				string s = "device_subscribe ibi OFF" + Environment.NewLine;
+				sendMsgQueue.Enqueue(s);
+			}
+		}
+
+		// This is necessary to ease the initialization. Once the user connects to a device, automatically subscribe to all streams "ticked".
+		private void InitializeStreamSubscription()
+		{
+			if (BVPStreamBox.Dispatcher.Invoke(() => { return BVPStreamBox.IsChecked.Value; }))
+			{
+				SubscribeStream("BVP");
+			}
+			if (GSRStreamBox.Dispatcher.Invoke(() => { return GSRStreamBox.IsChecked.Value; }))
+			{
+				SubscribeStream("GSR");
+			}
+			if (TempStreamBox.Dispatcher.Invoke(() => { return TempStreamBox.IsChecked.Value; }))
+			{
+				SubscribeStream("TMP");
+			}
+			if (IBIStreamBox.Dispatcher.Invoke(() => { return IBIStreamBox.IsChecked.Value; }))
+			{
+				SubscribeStream("IBI");
+			}
+		}
+
+		private void SubscribeBVP(object sender, RoutedEventArgs e)
+		{
+			if (BVPStreamBox.IsChecked.Value)
+			{
+				if (isConnected && empaticaConnected)
+				{
+					SubscribeStream("BVP");
+				}
+			}
+			else
+			{
+				if (isConnected && empaticaConnected)
+				{
+					UnsubscribeStream("BVP");
+				}
+			}
+		}
+
+		private void SubscribeGSR(object sender, RoutedEventArgs e)
+		{
+			if (GSRStreamBox.IsChecked.Value)
+			{
+				if (isConnected && empaticaConnected)
+				{
+					SubscribeStream("GSR");
+				}
+			}
+			else
+			{
+				if (isConnected && empaticaConnected)
+				{
+					UnsubscribeStream("GSR");
+				}
+			}
+		}
+
+		private void SubscribeTemp(object sender, RoutedEventArgs e)
+		{
+			if (TempStreamBox.IsChecked.Value)
+			{
+				if (isConnected && empaticaConnected)
+				{
+					SubscribeStream("TMP");
+				}
+			}
+			else
+			{
+				if (isConnected && empaticaConnected)
+				{
+					UnsubscribeStream("TMP");
+				}
+			}
+		}
+
+		private void SubscribeIBI(object sender, RoutedEventArgs e)
+		{
+			if (IBIStreamBox.IsChecked.Value)
+			{
+				if (isConnected && empaticaConnected)
+				{
+					SubscribeStream("IBI");
+				}
+			}
+			else
+			{
+				if (isConnected && empaticaConnected)
+				{
+					UnsubscribeStream("IBI");
+				}
+			}
 		}
 	}
 }
