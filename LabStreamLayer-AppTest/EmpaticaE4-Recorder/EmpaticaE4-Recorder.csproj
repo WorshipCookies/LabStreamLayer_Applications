@@ -76,7 +76,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="LSL.cs" />
+    <Compile Include="LSLStreamer.cs" />
     <Compile Include="LSLStreamingBVP.cs" />
+    <Compile Include="LSLStreamingGSR.cs" />
+    <Compile Include="LSLStreamingTemp.cs" />
     <Compile Include="StateObject.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

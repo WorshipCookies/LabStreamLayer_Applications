@@ -55,6 +55,8 @@ namespace EmpaticaE4_Recorder
 
 		// LabStreaming Layer Variables
 		private LSLStreamingBVP lslBVPOutlet;
+		private LSLStreamingGSR lslGSROutlet;
+		private LSLStreamingTemp lslTMPOutlet;
 
 		/// <summary>
 		/// UI Interface Variables
@@ -329,16 +331,40 @@ namespace EmpaticaE4_Recorder
 								{
 									LSLSubscribe_BVP();
 								}
+								else if(parser[2] == "gsr")
+								{
+									LSLSubscribe_GSR();
+								}
+								else if(parser[2] == "tmp")
+								{
+									LSLSubscribe_TMP();
+								}
 							}
 						}
 						else
 						{
-							if (parser[0] == "E4_Bvp")
+							if (parser[0] == "E4_Bvp" && lslBVPOutlet != null)
 							{
-								// Treat GSR Signal Here
+								// Treat BVP Signal Here
 								double timestamp = Convert.ToDouble(parser[1]);
 								double bvpValue = Convert.ToDouble(parser[2]);
 								lslBVPOutlet.PushSample(bvpValue, timestamp);
+								PushMsgToUI(line);
+							}
+							else if(parser[0] == "E4_Gsr" && lslGSROutlet != null)
+							{
+								// Treat GSR Signal Here
+								double timestamp = Convert.ToDouble(parser[1]);
+								double gsrValue = Convert.ToDouble(parser[2]);
+								lslGSROutlet.PushSample(gsrValue, timestamp);
+								PushMsgToUI(line);
+							}
+							else if(parser[0] == "E4_Temperature" && lslTMPOutlet != null)
+							{
+								// Treat TMP Signal Here
+								double timestamp = Convert.ToDouble(parser[1]);
+								double tmpValue = Convert.ToDouble(parser[2]);
+								lslTMPOutlet.PushSample(tmpValue, timestamp);
 								PushMsgToUI(line);
 							}
 						}
@@ -418,7 +444,6 @@ namespace EmpaticaE4_Recorder
 		}
 
 		// SUBSCRIBE STREAM RADIO BUTTON UI
-
 		private void SubscribeStream(string streamType)
 		{
 			if(streamType == "BVP")
@@ -473,18 +498,17 @@ namespace EmpaticaE4_Recorder
 			if (BVPStreamBox.Dispatcher.Invoke(() => { return BVPStreamBox.IsChecked.Value; }))
 			{
 				SubscribeStream("BVP");
+				Thread.Sleep(100); // Not the best solution, but client needs to wait for a response from the server.
 			}
 			if (GSRStreamBox.Dispatcher.Invoke(() => { return GSRStreamBox.IsChecked.Value; }))
 			{
 				SubscribeStream("GSR");
+				Thread.Sleep(100);
 			}
 			if (TempStreamBox.Dispatcher.Invoke(() => { return TempStreamBox.IsChecked.Value; }))
 			{
 				SubscribeStream("TMP");
-			}
-			if (IBIStreamBox.Dispatcher.Invoke(() => { return IBIStreamBox.IsChecked.Value; }))
-			{
-				SubscribeStream("IBI");
+				Thread.Sleep(100);
 			}
 		}
 
@@ -542,29 +566,21 @@ namespace EmpaticaE4_Recorder
 			}
 		}
 
-		private void SubscribeIBI(object sender, RoutedEventArgs e)
-		{
-			if (IBIStreamBox.IsChecked.Value)
-			{
-				if (isConnected && empaticaConnected)
-				{
-					SubscribeStream("IBI");
-				}
-			}
-			else
-			{
-				if (isConnected && empaticaConnected)
-				{
-					UnsubscribeStream("IBI");
-				}
-			}
-		}
 
 		// Lab Streaming Layer Functions
-		 
 		private void LSLSubscribe_BVP()
 		{
 			lslBVPOutlet = new LSLStreamingBVP(playerIDTextBox.Dispatcher.Invoke(() => { return playerIDTextBox.Text; }));
+		}
+
+		private void LSLSubscribe_GSR()
+		{
+			lslGSROutlet = new LSLStreamingGSR(playerIDTextBox.Dispatcher.Invoke(() => { return playerIDTextBox.Text; }));
+		}
+
+		private void LSLSubscribe_TMP()
+		{
+			lslTMPOutlet = new LSLStreamingTemp(playerIDTextBox.Dispatcher.Invoke(() => { return playerIDTextBox.Text; }));
 		}
 	}
 }

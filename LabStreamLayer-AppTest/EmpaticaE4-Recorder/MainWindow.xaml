@@ -12,11 +12,10 @@
         <ListBox x:Name="IDDeviceList" HorizontalAlignment="Left" Height="119" Margin="647,48,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Available Devices:" Height="23" Margin="647,20,25,0" VerticalAlignment="Top"/>
         <Button x:Name="refreshDeviceListButton" Content="Refresh List" HorizontalAlignment="Left" Margin="565,81,0,0" VerticalAlignment="Top" Width="77" Height="46" Click="RefreshDeviceListButton_Click"/>
-        <CheckBox x:Name="BVPStreamBox" Content="BVP" HorizontalAlignment="Left" Margin="210,58,0,0" VerticalAlignment="Top" Width="46" IsChecked="True" Checked="SubscribeBVP" Unchecked="SubscribeBVP"/>
-        <CheckBox x:Name="GSRStreamBox" Content="GSR" HorizontalAlignment="Left" Margin="210,78,0,0" VerticalAlignment="Top" IsChecked="True" Checked="SubscribeGSR" Unchecked="SubscribeGSR"/>
-        <CheckBox x:Name="TempStreamBox" Content="Skin Temperature" HorizontalAlignment="Left" Margin="210,98,0,0" VerticalAlignment="Top" IsChecked="True" Checked="SubscribeTemp" Unchecked="SubscribeTemp"/>
-        <CheckBox x:Name="IBIStreamBox" Content="IBI" HorizontalAlignment="Left" Margin="210,118,0,0" VerticalAlignment="Top" IsChecked="True" Checked="SubscribeIBI" Unchecked="SubscribeIBI"/>
-        <Label x:Name="StreamLabel" Content="Streams:" HorizontalAlignment="Left" Height="23" Margin="201,30,0,0" VerticalAlignment="Top" Width="55"/>
+        <CheckBox x:Name="BVPStreamBox" Content="BVP" HorizontalAlignment="Left" Margin="213,68,0,0" VerticalAlignment="Top" Width="46" IsChecked="True" Checked="SubscribeBVP" Unchecked="SubscribeBVP"/>
+        <CheckBox x:Name="GSRStreamBox" Content="GSR" HorizontalAlignment="Left" Margin="213,88,0,0" VerticalAlignment="Top" IsChecked="True" Checked="SubscribeGSR" Unchecked="SubscribeGSR"/>
+        <CheckBox x:Name="TempStreamBox" Content="Skin Temperature" HorizontalAlignment="Left" Margin="213,108,0,0" VerticalAlignment="Top" IsChecked="True" Checked="SubscribeTemp" Unchecked="SubscribeTemp"/>
+        <Label x:Name="StreamLabel" Content="Streams:" HorizontalAlignment="Left" Height="23" Margin="204,40,0,0" VerticalAlignment="Top" Width="55"/>
         <Label x:Name="playerIDLabel" Content="Player ID:" HorizontalAlignment="Left" Margin="24,20,0,0" VerticalAlignment="Top" Height="29" Width="61"/>
         <TextBox x:Name="playerIDTextBox" HorizontalAlignment="Left" Height="23" Margin="90,24,0,0" TextWrapping="Wrap" Text="P1" VerticalAlignment="Top" Width="23"/>
 
