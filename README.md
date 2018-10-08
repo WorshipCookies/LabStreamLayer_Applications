@@ -20,6 +20,12 @@ This application sends the specific frame data to LabRecorder during recording. 
 
 This application ties directly into the SensingTex Mat sensor device. It sends each pressure sensor value of the device (256 channels) through Lab Streaming Layer. Similarly to the other applications of this project, to fully take advandage of this code it is necessary to run it in parallel with LabRecorder and link this app to it.
 
+# Empatica E4 Recorder
+
+This application is capable of recording three different streams (BVP, GSR and Temperature) obtained from the Empatica E4 device and push it to LabStreaming Layer. Respective software for the Empatica is necessary such as the Empatica Server, which allows access to the E4 devices. Futhermore, similar to the other applications in this software suite the LabRecorder software is necessary to effectively record the signals.
+
+Side Note: Given that the BVP and GSR/Temp have different sampling rates, each signal type has its own LabStreaming Layer "pipeline", thus it is important to connect the different streams when running LabRecorder.
+
 # AppTest
 
 This is a simple application that was used to do initial tests on LabStreaming Layer. It sends custom messages (markers) to LabRecorder whenever the user presses the send button.
