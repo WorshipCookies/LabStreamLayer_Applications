@@ -14,7 +14,7 @@ This application is capable of recording several channels from the Bitalino Devi
 
 # IntelRealSense Frame Capture Application
 
-This application sends the specific frame data to LabRecorder during recording. This allows to synchronize recordings during post-processing, by knowing exactly the frames of a particular event and where to process the video. Currently the recordings are in raw data, which can ocupy a large amount of space. To process the video recordings check the librealsense SDK (e.g. rs-convert).
+This application sends the specific frame data to LabRecorder during recording. This allows to synchronize recordings during post-processing, by knowing exactly the frames of a particular event and where to process the video. Currently the recordings are stored in H264 (using FFMPEG) and respectively compressed as close to lossless as possible (in order to reduce the amount of storage space). The latter can be changed in the code if required.
 
 # Sensing Tex Pressure Mat Application
 
