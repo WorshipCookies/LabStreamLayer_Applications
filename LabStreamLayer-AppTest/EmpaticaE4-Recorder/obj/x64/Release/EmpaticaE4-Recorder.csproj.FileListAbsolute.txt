@@ -14,3 +14,16 @@ D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Record
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\obj\x64\Release\EmpaticaE4-Recorder.csproj.CoreCompileInputs.cache
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\obj\x64\Release\EmpaticaE4-Recorder.exe
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\obj\x64\Release\EmpaticaE4-Recorder.pdb
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Release\Microsoft.CSharp.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Release\PresentationCore.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Release\PresentationFramework.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Release\System.Data.DataSetExtensions.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Release\System.Data.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Release\System.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Release\System.Net.Http.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Release\System.Xaml.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Release\System.Xml.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Release\System.Xml.Linq.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Release\WindowsBase.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\obj\x64\Release\EmpaticaE4-Recorder.csprojAssemblyReference.cache
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\obj\x64\Release\EmpaticaE4-Recorder.csproj.CopyComplete
