@@ -27,3 +27,4 @@ D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-Ra
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-RandomSignalSender\bin\x64\Release\System.Xml.Linq.dll
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-RandomSignalSender\bin\x64\Release\WindowsBase.dll
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-RandomSignalSender\obj\x64\Release\LabStreamLayer-RandomSignalSender.csproj.CopyComplete
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-RandomSignalSender\bin\x64\Release\LSL.cs

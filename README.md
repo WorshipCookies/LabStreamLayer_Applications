@@ -8,6 +8,10 @@ All these applications are running in x64, so when compiling make sure that you 
 
 It is also important to obtain the LabRecorder from the original LabStreaming Layer software, as all devices will be linked to this software. Once all devices are linked LabRecorder will take care of synchronizing all of the different applications.
 
+# Dependencies
+
+The majority of this software was developed on the .NET Framework 4.7.1., futhermore given that these applications are loading external dlls (i.e. LabStreaming Layer and Bitalino) it is necessary to also download and install the Microsoft Visual VC++ Redistributable 2013 and 2017 (both x86 and x64).
+
 # BitalinoRecorder Application
 
 This application is capable of recording several channels from the Bitalino Device. Currently, it is set to record 3 channels, which was tested on ECG (Electrocardiogram), EDA (Electrodermal Activity) and Respiration. To fully make it work it is necessary to run LabRecorder in parallel and link this app to it.
