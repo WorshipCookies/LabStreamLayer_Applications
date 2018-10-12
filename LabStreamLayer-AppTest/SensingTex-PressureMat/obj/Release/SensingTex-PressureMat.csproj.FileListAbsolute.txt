@@ -1,0 +1,17 @@
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-PressureMat\bin\Release\liblsl64.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-PressureMat\bin\Release\SensingTex-PressureMat.exe.config
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-PressureMat\bin\Release\SensingTex-PressureMat.exe
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-PressureMat\bin\Release\SensingTex-PressureMat.pdb
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-PressureMat\obj\Release\SensingTex-PressureMat.csprojAssemblyReference.cache
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-PressureMat\obj\Release\MainWindow.g.cs
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-PressureMat\obj\Release\App.g.cs
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-PressureMat\obj\Release\SensingTex-PressureMat_Content.g.cs
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-PressureMat\obj\Release\SensingTex-PressureMat_MarkupCompile.cache
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-PressureMat\obj\Release\SensingTex-PressureMat_MarkupCompile.lref
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-PressureMat\obj\Release\MainWindow.baml
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-PressureMat\obj\Release\SensingTex-PressureMat.g.resources
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-PressureMat\obj\Release\SensingTex_PressureMat.Properties.Resources.resources
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-PressureMat\obj\Release\SensingTex-PressureMat.csproj.GenerateResource.cache
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-PressureMat\obj\Release\SensingTex-PressureMat.csproj.CoreCompileInputs.cache
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-PressureMat\obj\Release\SensingTex-PressureMat.exe
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\SensingTex-PressureMat\obj\Release\SensingTex-PressureMat.pdb

@@ -1,0 +1,17 @@
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-RandomSignalSender\bin\x64\Release\liblsl64.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-RandomSignalSender\bin\x64\Release\LabStreamLayer-RandomSignalSender.exe.config
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-RandomSignalSender\bin\x64\Release\LabStreamLayer-RandomSignalSender.exe
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-RandomSignalSender\bin\x64\Release\LabStreamLayer-RandomSignalSender.pdb
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-RandomSignalSender\obj\x64\Release\LabStreamLayer-RandomSignalSender.csprojAssemblyReference.cache
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-RandomSignalSender\obj\x64\Release\MainWindow.g.cs
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-RandomSignalSender\obj\x64\Release\App.g.cs
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-RandomSignalSender\obj\x64\Release\LabStreamLayer-RandomSignalSender_Content.g.cs
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-RandomSignalSender\obj\x64\Release\LabStreamLayer-RandomSignalSender_MarkupCompile.cache
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-RandomSignalSender\obj\x64\Release\LabStreamLayer-RandomSignalSender_MarkupCompile.lref
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-RandomSignalSender\obj\x64\Release\MainWindow.baml
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-RandomSignalSender\obj\x64\Release\LabStreamLayer-RandomSignalSender.g.resources
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-RandomSignalSender\obj\x64\Release\LabStreamLayer_RandomSignalSender.Properties.Resources.resources
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-RandomSignalSender\obj\x64\Release\LabStreamLayer-RandomSignalSender.csproj.GenerateResource.cache
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-RandomSignalSender\obj\x64\Release\LabStreamLayer-RandomSignalSender.csproj.CoreCompileInputs.cache
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-RandomSignalSender\obj\x64\Release\LabStreamLayer-RandomSignalSender.exe
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-RandomSignalSender\obj\x64\Release\LabStreamLayer-RandomSignalSender.pdb
