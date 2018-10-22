@@ -16,19 +16,27 @@ The majority of this software was developed on the .NET Framework 4.7.1., futher
 
 This application is capable of recording several channels from the Bitalino Device. Currently, it is set to record 3 channels, which was tested on ECG (Electrocardiogram), EDA (Electrodermal Activity) and Respiration. To fully make it work it is necessary to run LabRecorder in parallel and link this app to it.
 
+This Application supports "parametrized execution", which kickstarts the recording process immediatly if run with a PlayerID Parameter. Example: C:\BitalinoRecorder.exe X; where X is the player ID. Important: Bitalino must be connected through Bluetooth for this method to work. 
+
 # IntelRealSense Frame Capture Application
 
 This application sends the specific frame data to LabRecorder during recording. This allows to synchronize recordings during post-processing, by knowing exactly the frames of a particular event and where to process the video. Currently the recordings are stored in H264 (using FFMPEG) and respectively compressed as close to lossless as possible (in order to reduce the amount of storage space). The latter can be changed in the code if required.
 
+This Application supports "parametrized execution", which kickstarts the recording process immediatly if run with a PlayerID Parameter. Example: C:\IntelRealSense-FrameCapture.exe X; where X is the player ID.
+
 # Sensing Tex Pressure Mat Application
 
 This application ties directly into the SensingTex Mat sensor device. It sends each pressure sensor value of the device (256 channels) through Lab Streaming Layer. Similarly to the other applications of this project, to fully take advandage of this code it is necessary to run it in parallel with LabRecorder and link this app to it.
+
+This Application supports "parametrized execution", which kickstarts the recording process immediatly if run with a PlayerID and COM Port Number Parameter. Example: C:\SensingTex-PressureMat.exe X Y; where X is the player ID and Y is the COM Port Number associated to the Pressure Sensing Mat.
 
 # Empatica E4 Recorder
 
 This application is capable of recording three different streams (BVP, GSR and Temperature) obtained from the Empatica E4 device and push it to LabStreaming Layer. Respective software for the Empatica is necessary such as the Empatica Server, which allows access to the E4 devices. Futhermore, similar to the other applications in this software suite the LabRecorder software is necessary to effectively record the signals.
 
 Side Note: Given that the BVP and GSR/Temp have different sampling rates, each signal type has its own LabStreaming Layer "pipeline", thus it is important to connect the different streams when running LabRecorder.
+
+This Application supports "parametrized execution", which kickstarts the recording process immediatly if run with a PlayerID Parameter. Example: C:\EmpaticaE4-Recorder.exe X; where X is the player ID. Important: Empatica Server must be running and have an associated device to work.
 
 # Script Execution Application
 
