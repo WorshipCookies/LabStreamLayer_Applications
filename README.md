@@ -35,7 +35,7 @@ Side Note: Given that the BVP and GSR/Temp have different sampling rates, each s
 This is a very simple program that allows to batch run executables from an ExecutionCommands.txt. This was created simply for experiment support. It allows to batch run the LSL Recorders required during experiment deployment, facilitating the protocol and reducing the number of errors during the actual experimental process.
 
 In order to use the ExecutionCommands.txt expects a path in every newline as such:
-PATH\TO\EXECUTABLE.EXE,EXECUTABLE_PARAMETERS_1 EXECUTABLE_PARAMETERS_2 ...
+PATH\TO\EXECUTABLE.EXE,EXE_PARAM_1 EXE_PARAM_2 ...
 
 # AppTest
 
