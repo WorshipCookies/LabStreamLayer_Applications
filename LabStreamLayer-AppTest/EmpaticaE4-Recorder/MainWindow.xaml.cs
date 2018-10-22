@@ -63,11 +63,27 @@ namespace EmpaticaE4_Recorder
 		/// </summary>
 		private delegate void WriteToTextBoxDelegate(string message);
 
+		private bool quickStart = false;
+
 		public MainWindow()
 		{
 			InitializeComponent();
 			this.Closed += new EventHandler(OnWindowClosing);
+			EmpaticaThreadsStarter();
+		}
 
+		public MainWindow(string pIDValue)
+		{
+			InitializeComponent();
+			this.Closed += new EventHandler(OnWindowClosing);
+			EmpaticaThreadsStarter();
+			playerIDTextBox.Text = pIDValue;
+
+			quickStart = true;
+		}
+
+		private void EmpaticaThreadsStarter()
+		{
 			Thread th_sender = new Thread(ConnectEmpaticaServer);
 			th_sender.Name = "Sender Thread";
 			th_sender.Start();
@@ -79,7 +95,12 @@ namespace EmpaticaE4_Recorder
 
 		private void ConnectDevice_Click(object sender, RoutedEventArgs e)
 		{
-			if(IDDeviceList.SelectedValue != null && !empaticaConnected)
+			ConnectEmpaticaDevice();
+		}
+
+		private void ConnectEmpaticaDevice()
+		{
+			if (IDDeviceList.SelectedValue != null && !empaticaConnected)
 			{
 				string id = (string)IDDeviceList.SelectedValue;
 				ConnectEmpaticaDevice(id);
@@ -415,6 +436,11 @@ namespace EmpaticaE4_Recorder
 			if(IDDeviceList.Items.Count > 0)
 			{
 				IDDeviceList.SelectedIndex = 0;
+			}
+
+			if (quickStart)
+			{
+				ConnectEmpaticaDevice();
 			}
 		}
 

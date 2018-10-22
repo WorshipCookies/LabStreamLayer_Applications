@@ -58,23 +58,37 @@ namespace SensingTex_PressureMat
 		public MainWindow()
         {
 			InitializeComponent();
+			InitializeVisualNodes();
+        }
 
+		public MainWindow(string pIDValue, int com_port)
+		{
+			InitializeComponent();
+			InitializeVisualNodes();
+
+			idTextBox.Text = pIDValue;
+			comPortText.Text = "" + com_port;
+			ConnectMat();
+		}
+
+		public void InitializeVisualNodes()
+		{
 			// According to the documentation the Sensing Mat is a 16x16 pressure sensor device. 
 			// By default the Sampling Rate is 1000Hz, but that is too much so we reduce it to 100Hz (0.1).
 			matSensor = new MattressDevice(16, 16, 0.1);
 			matSensor.DataReadyEvent += OnDataSensor;
 
 			threshold = 200;
-			
 
-			for(int r = 0; r < rows; r++)
+
+			for (int r = 0; r < rows; r++)
 			{
-				for(int c = 0; c < cols; c++)
+				for (int c = 0; c < cols; c++)
 				{
 					pressureNodes[r, c] = new Label();
 					pressureNodes[r, c].Height = NODESIZE;
 					pressureNodes[r, c].Width = NODESIZE;
-					
+
 					pressureNodes[r, c].Content = "";
 					pressureNodes[r, c].Background = Brushes.Black;
 					pressureNodes[r, c].Visibility = Visibility.Visible;
@@ -85,7 +99,7 @@ namespace SensingTex_PressureMat
 					pressureNodePanel.Children.Add(pressureNodes[r, c]);
 				}
 			}
-        }
+		}
 
 		public void OnDataSensor(object sender, DataReadyEventArgs e)
 		{
@@ -174,6 +188,11 @@ namespace SensingTex_PressureMat
 
 		private void comPortConnectButton_Click(object sender, RoutedEventArgs e)
 		{
+			ConnectMat();
+		}
+
+		private void ConnectMat()
+		{
 			if (!isConnected)
 			{
 				try
@@ -196,17 +215,17 @@ namespace SensingTex_PressureMat
 							lslOutlet = new liblsl.StreamOutlet(lslStreamInfo);
 						}
 					}
-						
+
 					else
 					{
 						MessageBoxResult result = MessageBox.Show("ERROR: Not Able to Connect",
 										  "Connection Unsuccessful", MessageBoxButton.OK);
 					}
-						
+
 				}
 				catch (Exception ex)
 				{
-					
+
 				}
 			}
 			else
@@ -226,13 +245,11 @@ namespace SensingTex_PressureMat
 										  "An Unknown Problem Occurred while Disconnecting", MessageBoxButton.OK);
 					}
 				}
-				catch(Exception ex)
+				catch (Exception ex)
 				{
 
 				}
 			}
-
-
 		}
 
 		private Brush CalculateHeatMapColor(int low, int high, int value)

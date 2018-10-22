@@ -15,3 +15,15 @@ D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-Ap
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\obj\x64\Debug\LabStreamLayer-AppTest.exe
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\obj\x64\Debug\LabStreamLayer-AppTest.pdb
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\obj\x64\Debug\LabStreamLayer-AppTest.csprojAssemblyReference.cache
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\bin\x64\Debug\Microsoft.CSharp.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\bin\x64\Debug\PresentationCore.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\bin\x64\Debug\PresentationFramework.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\bin\x64\Debug\System.Data.DataSetExtensions.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\bin\x64\Debug\System.Data.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\bin\x64\Debug\System.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\bin\x64\Debug\System.Net.Http.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\bin\x64\Debug\System.Xaml.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\bin\x64\Debug\System.Xml.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\bin\x64\Debug\System.Xml.Linq.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\bin\x64\Debug\WindowsBase.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\LabStreamLayer-AppTest\obj\x64\Debug\LabStreamLayer-AppTest.csproj.CopyComplete

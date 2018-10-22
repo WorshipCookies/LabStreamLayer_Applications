@@ -15,3 +15,15 @@ D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Record
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\obj\x64\Debug\EmpaticaE4-Recorder.pdb
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Debug\liblsl64.dll
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\obj\x64\Debug\EmpaticaE4-Recorder_Content.g.cs
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Debug\Microsoft.CSharp.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Debug\PresentationCore.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Debug\PresentationFramework.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Debug\System.Data.DataSetExtensions.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Debug\System.Data.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Debug\System.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Debug\System.Net.Http.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Debug\System.Xaml.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Debug\System.Xml.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Debug\System.Xml.Linq.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\bin\x64\Debug\WindowsBase.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\EmpaticaE4-Recorder\obj\x64\Debug\EmpaticaE4-Recorder.csproj.CopyComplete

@@ -35,3 +35,15 @@ D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-Fr
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-FrameCapture\bin\x64\Debug\Accord.Video.xml
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-FrameCapture\bin\x64\Debug\Accord.Video.FFMPEG.x64.xml
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-FrameCapture\bin\x64\Debug\AForge.xml
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-FrameCapture\bin\x64\Debug\Microsoft.CSharp.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-FrameCapture\bin\x64\Debug\PresentationCore.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-FrameCapture\bin\x64\Debug\PresentationFramework.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-FrameCapture\bin\x64\Debug\System.Data.DataSetExtensions.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-FrameCapture\bin\x64\Debug\System.Data.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-FrameCapture\bin\x64\Debug\System.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-FrameCapture\bin\x64\Debug\System.Drawing.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-FrameCapture\bin\x64\Debug\System.Net.Http.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-FrameCapture\bin\x64\Debug\System.Xaml.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-FrameCapture\bin\x64\Debug\System.Xml.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-FrameCapture\bin\x64\Debug\System.Xml.Linq.dll
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\IntelRealSense-FrameCapture\bin\x64\Debug\WindowsBase.dll

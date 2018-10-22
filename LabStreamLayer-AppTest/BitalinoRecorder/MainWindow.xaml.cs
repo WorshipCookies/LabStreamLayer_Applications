@@ -81,6 +81,7 @@ namespace BitalinoRecorder
 
         private const liblsl.channel_format_t lslChannelFormat = liblsl.channel_format_t.cf_int16; // Stream Variable Format
 
+		private bool QuickStart = false;
 
         public MainWindow()
         {
@@ -90,6 +91,21 @@ namespace BitalinoRecorder
             this.Closed += new EventHandler(OnWindowClosing);
             OnVariableChange += EnableStreamingButton;
         }
+
+		public MainWindow(string pIDValue)
+		{
+			InitializeComponent();
+			ShowDevices();
+			ShowSamplingRates();
+			this.Closed += new EventHandler(OnWindowClosing);
+			OnVariableChange += EnableStreamingButton;
+			this.idTextBox.Text = pIDValue;
+
+			QuickConnect();
+
+			connectButton.IsEnabled = false;
+		}
+
 
         private void ShowDevices()
         {
@@ -185,32 +201,47 @@ namespace BitalinoRecorder
                     new object[] { "Thread Successfully Closed" });
         }
 
+		private void QuickConnect()
+		{
+			if(BlinoDeviceList.Items.Count > 0)
+			{
+				BlinoDeviceList.SelectedValue = BlinoDeviceList.Items[0];
+				connectLSL();
+				StreamingProcess();
+			}
+		}
+
         private void connectButton_Click(object sender, RoutedEventArgs e)
         {
-            // Connect user selected device if not device is currently connected
-            if(BlinoDeviceList.SelectedValue != null && connected_device == null && lslChannelCount > 0)
-            {
-                macAddress = BlinoDeviceList.SelectedValue.ToString().Split('-')[0];
-
-                infoOutputBox.Text = "Connecting to Device ... " + macAddress;
-
-                connected_device = new Bitalino(macAddress);
-
-                infoOutputBox.Text = "Device " + macAddress + " Sucessfully Connected.";
-
-                LinkLabStreamingLayer(); // Link to Lab Streaming Layer
-
-            }
-            // If a device is already connected warn the user.
-            else if (connected_device != null)
-            {
-                infoOutputBox.Text = "Existing Device (" + macAddress + ") Already Connected";
-            }
-            else if(lslChannelCount == 0)
-            {
-                infoOutputBox.Text = "Error! Atleast one stream must be selected in order to start streaming.";
-            }
+			connectLSL();
         }
+
+		private void connectLSL()
+		{
+			// Connect user selected device if not device is currently connected
+			if (BlinoDeviceList.SelectedValue != null && connected_device == null && lslChannelCount > 0)
+			{
+				macAddress = BlinoDeviceList.SelectedValue.ToString().Split('-')[0];
+
+				infoOutputBox.Text = "Connecting to Device ... " + macAddress;
+
+				connected_device = new Bitalino(macAddress);
+
+				infoOutputBox.Text = "Device " + macAddress + " Sucessfully Connected.";
+
+				LinkLabStreamingLayer(); // Link to Lab Streaming Layer
+
+			}
+			// If a device is already connected warn the user.
+			else if (connected_device != null)
+			{
+				infoOutputBox.Text = "Existing Device (" + macAddress + ") Already Connected";
+			}
+			else if (lslChannelCount == 0)
+			{
+				infoOutputBox.Text = "Error! Atleast one stream must be selected in order to start streaming.";
+			}
+		}
 
         private void LinkLabStreamingLayer()
         {
@@ -269,28 +300,34 @@ namespace BitalinoRecorder
 
         private void startStreamingButton_Click(object sender, RoutedEventArgs e)
         {
-            if (IS_STREAMING)
-            {
-                IS_STREAMING = false;
-                startStreamingButton.Content = "Start Streaming";
-            }
-            else if (!IS_STREAMING)
-            {
-                IS_STREAMING = true;
-
-                // Run Thread
-                startStreamingButton.Content = "Stop Streaming";
-
-
-                bool ecgVal = ECGCheck.IsChecked.Value;
-                bool edaVal = EDACheck.IsChecked.Value;
-                bool respVal = RespCheck.IsChecked.Value;
-                streamingThread = new Thread(() => StreamData(connected_device,lslOutlet, 
-                    ecgVal, edaVal, respVal)); // Pass the connected device argument to the thread
-
-                streamingThread.Start(); // Start Streaming
-            }
+			StreamingProcess();
         }
+
+		private void StreamingProcess()
+		{
+			if (IS_STREAMING)
+			{
+				IS_STREAMING = false;
+				startStreamingButton.Content = "Start Streaming";
+			}
+			else if (!IS_STREAMING)
+			{
+				IS_STREAMING = true;
+
+				// Run Thread
+				startStreamingButton.Content = "Stop Streaming";
+
+
+				bool ecgVal = ECGCheck.IsChecked.Value;
+				bool edaVal = EDACheck.IsChecked.Value;
+				bool respVal = RespCheck.IsChecked.Value;
+				streamingThread = new Thread(() => StreamData(connected_device, lslOutlet,
+					ecgVal, edaVal, respVal)); // Pass the connected device argument to the thread
+
+				streamingThread.Start(); // Start Streaming
+			}
+		}
+
 
         private void ECGCheck_Checked(object sender, RoutedEventArgs e)
         {

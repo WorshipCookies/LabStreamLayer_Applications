@@ -86,9 +86,16 @@ namespace Intel.RealSense
         
         public CaptureWindow()
         {
-			
             InitializeComponent();
         }
+
+		public CaptureWindow(string pIDValue)
+		{
+			InitializeComponent();
+			this.idTextBox.Text = pIDValue;
+
+			LinkLabStreamingLayer();
+		}
 
         /**
          * NOTES 

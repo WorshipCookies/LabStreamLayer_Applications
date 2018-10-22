@@ -13,5 +13,29 @@ namespace BitalinoRecorder
     /// </summary>
     public partial class App : Application
     {
+		void App_Startup(object sender, StartupEventArgs e)
+		{
+			string PIDNew = "";
+
+			if(e.Args.Length > 0)
+			{
+				PIDNew = e.Args[0].ToString();
+			}
+
+			if(PIDNew == "")
+			{
+				// Default Parameters
+				MainWindow mainWindow = new MainWindow();
+				mainWindow.Show();
+			}
+			else
+			{
+				// Specific Parameters
+				MainWindow mainWindow = new MainWindow("P" + PIDNew);
+				mainWindow.Show();
+			}
+		}
+
+
     }
 }
