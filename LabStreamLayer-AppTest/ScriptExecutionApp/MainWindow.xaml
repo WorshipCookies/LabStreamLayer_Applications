@@ -1,0 +1,15 @@
+﻿<Window x:Class="ScriptExecutionApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScriptExecutionApp"
+        mc:Ignorable="d"
+        Title="Execute Program Chain Application" Height="450" Width="800">
+    <Grid>
+        <Button x:Name="loadExecutionList" Content="Select Execution List" HorizontalAlignment="Left" Margin="71,57,0,0" VerticalAlignment="Top" Width="196" Height="78" Click="loadExecutionList_Click"/>
+        <TextBlock x:Name="execFilePath" HorizontalAlignment="Left" Height="33" Margin="296,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="416"/>
+        <Button x:Name="runButton" Content="Run All Processes" HorizontalAlignment="Left" Margin="296,288,0,0" VerticalAlignment="Top" Width="159" Height="70" Click="runButton_Click"/>
+
+    </Grid>
+</Window>

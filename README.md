@@ -30,6 +30,13 @@ This application is capable of recording three different streams (BVP, GSR and T
 
 Side Note: Given that the BVP and GSR/Temp have different sampling rates, each signal type has its own LabStreaming Layer "pipeline", thus it is important to connect the different streams when running LabRecorder.
 
+# Script Execution Application
+
+This is a very simple program that allows to batch run executables from an ExecutionCommands.txt. This was created simply for experiment support. It allows to batch run the LSL Recorders required during experiment deployment, facilitating the protocol and reducing the number of errors during the actual experimental process.
+
+In order to use the ExecutionCommands.txt expects a path in every newline as such:
+PATH\TO\EXECUTABLE.EXE,EXECUTABLE_PARAMETERS_1 EXECUTABLE_PARAMETERS_2 ...
+
 # AppTest
 
 This is a simple application that was used to do initial tests on LabStreaming Layer. It sends custom messages (markers) to LabRecorder whenever the user presses the send button.

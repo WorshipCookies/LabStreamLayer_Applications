@@ -1,0 +1,15 @@
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\ScriptExecutionApp\bin\Release\ScriptExecutionApp.exe.config
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\ScriptExecutionApp\bin\Release\ScriptExecutionApp.exe
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\ScriptExecutionApp\bin\Release\ScriptExecutionApp.pdb
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\ScriptExecutionApp\obj\Release\ScriptExecutionApp.csprojAssemblyReference.cache
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\ScriptExecutionApp\obj\Release\MainWindow.g.cs
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\ScriptExecutionApp\obj\Release\App.g.cs
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\ScriptExecutionApp\obj\Release\ScriptExecutionApp_MarkupCompile.cache
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\ScriptExecutionApp\obj\Release\ScriptExecutionApp_MarkupCompile.lref
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\ScriptExecutionApp\obj\Release\MainWindow.baml
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\ScriptExecutionApp\obj\Release\ScriptExecutionApp.g.resources
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\ScriptExecutionApp\obj\Release\ScriptExecutionApp.Properties.Resources.resources
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\ScriptExecutionApp\obj\Release\ScriptExecutionApp.csproj.GenerateResource.cache
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\ScriptExecutionApp\obj\Release\ScriptExecutionApp.csproj.CoreCompileInputs.cache
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\ScriptExecutionApp\obj\Release\ScriptExecutionApp.exe
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\ScriptExecutionApp\obj\Release\ScriptExecutionApp.pdb

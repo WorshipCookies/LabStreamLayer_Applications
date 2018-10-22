@@ -157,8 +157,8 @@ namespace BitalinoRecorder
                     // Manage the ECG Values
                     if (ecg)
                     {
-                        s += frames[i].analog[0];
-                        s += " ";
+                        //s += frames[i].analog[0];
+                        //s += " ";
                         sample[i, auxSampleIndexer] = frames[i].analog[0];
 
                         auxSampleIndexer += 1;
@@ -167,8 +167,8 @@ namespace BitalinoRecorder
                     // Manage the EDA Values
                     if (eda)
                     {
-                        s += frames[i].analog[1];
-                        s += " ";
+                        //s += frames[i].analog[1];
+                        //s += " ";
                         sample[i, auxSampleIndexer] = frames[i].analog[1];
 
                         auxSampleIndexer += 1;
@@ -177,8 +177,8 @@ namespace BitalinoRecorder
                     // Manage the Respiration Values
                     if (resp)
                     {
-                        s += frames[i].analog[2];
-                        s += " ";
+                        //s += frames[i].analog[2];
+                        //s += " ";
                         sample[i, auxSampleIndexer] = frames[i].analog[2];
 
                         auxSampleIndexer += 1;
@@ -186,10 +186,11 @@ namespace BitalinoRecorder
                 }
 
                 s += "  LENGTH = " + frames.Length;
+
                 // Delegate the Output Values to the Streaming Text Box
                 streamingOutputBox.Dispatcher.Invoke(
                     new UpdateStreamBoxCallback(this.AppendStreamTextBox), 
-                    new object[] { s });
+                    new object[] { "Receiving Data: " + s });
 
                 double end_clock = liblsl.local_clock(); // Record local clock after chunk processing
 
