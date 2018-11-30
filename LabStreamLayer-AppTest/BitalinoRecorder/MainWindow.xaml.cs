@@ -101,13 +101,28 @@ namespace BitalinoRecorder
 			OnVariableChange += EnableStreamingButton;
 			this.idTextBox.Text = pIDValue;
 
-			QuickConnect();
+			QuickConnect(0);
+
+			connectButton.IsEnabled = false;
+		}
+
+		public MainWindow(string pIDValue, int BitalinoDeviceIndex)
+		{
+			InitializeComponent();
+			ShowDevices();
+			ShowSamplingRates();
+			this.Closed += new EventHandler(OnWindowClosing);
+			OnVariableChange += EnableStreamingButton;
+			this.idTextBox.Text = pIDValue;
+
+			QuickConnect(BitalinoDeviceIndex);
 
 			connectButton.IsEnabled = false;
 		}
 
 
-        private void ShowDevices()
+
+		private void ShowDevices()
         {
             Bitalino.DevInfo[] devices = Bitalino.find();
 
@@ -202,11 +217,11 @@ namespace BitalinoRecorder
                     new object[] { "Thread Successfully Closed" });
         }
 
-		private void QuickConnect()
+		private void QuickConnect(int bitalinoDeviceIndex)
 		{
 			if(BlinoDeviceList.Items.Count > 0)
 			{
-				BlinoDeviceList.SelectedValue = BlinoDeviceList.Items[0];
+				BlinoDeviceList.SelectedValue = BlinoDeviceList.Items[bitalinoDeviceIndex];
 				connectLSL();
 				StreamingProcess();
 			}

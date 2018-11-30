@@ -265,9 +265,10 @@ namespace Intel.RealSense
         {
 			tokenSource.Cancel();
 			
-			if (pipeline != null)
+			while (pipeline != null)
 			{
 				pipeline.Stop();
+				pipeline = null;
 			}
 		}
 

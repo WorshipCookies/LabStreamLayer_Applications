@@ -16,7 +16,7 @@ The majority of this software was developed on the .NET Framework 4.7.1., futher
 
 This application is capable of recording several channels from the Bitalino Device. Currently, it is set to record 3 channels, which was tested on ECG (Electrocardiogram), EDA (Electrodermal Activity) and Respiration. To fully make it work it is necessary to run LabRecorder in parallel and link this app to it.
 
-This Application supports "parametrized execution", which kickstarts the recording process immediatly if run with a PlayerID Parameter. Example: C:\BitalinoRecorder.exe X; where X is the player ID. Important: Bitalino must be connected through Bluetooth for this method to work. 
+This Application supports "parametrized execution", which kickstarts the recording process immediatly if run with a PlayerID Parameter and a BITalino Device Index Number. Example: C:\BitalinoRecorder.exe X,Y; where X is the player ID and the Y is the BITalino Device Index in the Device List of the Interface. Important: Bitalino must be connected through Bluetooth for this method to work.
 
 # IntelRealSense Frame Capture Application
 

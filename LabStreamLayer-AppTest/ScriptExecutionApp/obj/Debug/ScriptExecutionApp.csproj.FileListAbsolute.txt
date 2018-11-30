@@ -12,3 +12,4 @@ D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\ScriptExecutionAp
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\ScriptExecutionApp\obj\Debug\ScriptExecutionApp.csproj.CoreCompileInputs.cache
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\ScriptExecutionApp\obj\Debug\ScriptExecutionApp.exe
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\ScriptExecutionApp\obj\Debug\ScriptExecutionApp.pdb
+D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\ScriptExecutionApp\obj\Debug\ScriptExecutionApp.csprojAssemblyReference.cache
