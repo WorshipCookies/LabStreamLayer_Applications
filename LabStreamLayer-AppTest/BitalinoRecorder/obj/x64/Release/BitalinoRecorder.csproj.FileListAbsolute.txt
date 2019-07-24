@@ -28,3 +28,33 @@ D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\bin\x64\Release\System.Xml.dll
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\bin\x64\Release\System.Xml.Linq.dll
 D:\Documents\GitHub\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\bin\x64\Release\WindowsBase.dll
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\bin\x64\Release\BITalino_x64.dll
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\bin\x64\Release\liblsl64.dll
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\bin\x64\Release\BitalinoRecorder.exe.config
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\bin\x64\Release\BitalinoRecorder.exe
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\bin\x64\Release\BitalinoRecorder.pdb
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\bin\x64\Release\Microsoft.CSharp.dll
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\bin\x64\Release\PresentationCore.dll
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\bin\x64\Release\PresentationFramework.dll
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\bin\x64\Release\System.Data.DataSetExtensions.dll
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\bin\x64\Release\System.Data.dll
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\bin\x64\Release\System.dll
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\bin\x64\Release\System.Net.Http.dll
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\bin\x64\Release\System.Xaml.dll
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\bin\x64\Release\System.Xml.dll
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\bin\x64\Release\System.Xml.Linq.dll
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\bin\x64\Release\WindowsBase.dll
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\obj\x64\Release\BitalinoRecorder.csprojAssemblyReference.cache
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\obj\x64\Release\MainWindow.g.cs
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\obj\x64\Release\App.g.cs
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\obj\x64\Release\BitalinoRecorder_Content.g.cs
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\obj\x64\Release\BitalinoRecorder_MarkupCompile.cache
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\obj\x64\Release\BitalinoRecorder_MarkupCompile.lref
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\obj\x64\Release\MainWindow.baml
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\obj\x64\Release\BitalinoRecorder.g.resources
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\obj\x64\Release\BitalinoRecorder.Properties.Resources.resources
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\obj\x64\Release\BitalinoRecorder.csproj.GenerateResource.cache
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\obj\x64\Release\BitalinoRecorder.csproj.CoreCompileInputs.cache
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\obj\x64\Release\BitalinoRecorder.csproj.CopyComplete
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\obj\x64\Release\BitalinoRecorder.exe
+D:\Unity Projects\LabStreamLayer\ApplicationLSL_Test\LabStreamLayer-AppTest\BitalinoRecorder\obj\x64\Release\BitalinoRecorder.pdb

@@ -17,7 +17,9 @@
         <CheckBox x:Name="EDACheck" Content="Enable EDA (A2)" HorizontalAlignment="Left" Margin="628,92,0,0" VerticalAlignment="Top" Width="139" IsChecked="True" Checked="EDACheck_Checked" Unchecked="EDACheck_Checked"/>
         <CheckBox x:Name="ECGCheck" Content="Enable ECG (A1)" HorizontalAlignment="Left" Margin="628,72,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.495,-0.342" Width="113" IsChecked="True" Checked="ECGCheck_Checked" Unchecked="ECGCheck_Checked"/>
         <CheckBox x:Name="RespCheck" Content="Enable Respiration (A3)" HorizontalAlignment="Left" Margin="628,112,0,0" VerticalAlignment="Top" IsChecked="True" RenderTransformOrigin="-0.217,-0.221" Checked="RespCheck_Checked" Unchecked="RespCheck_Checked"/>
-        <Label x:Name="SamplingRateLabel" Content="Sampling Rate (Hz)" HorizontalAlignment="Left" Height="27" Margin="643,141,0,0" VerticalAlignment="Top" Width="113"/>
-        <ListBox x:Name="SamplingRateListBox" HorizontalAlignment="Left" Height="67" Margin="628,168,0,0" VerticalAlignment="Top" Width="139"/>
+        <CheckBox x:Name="EMGCheck" Content="Enable EMG (A4)" HorizontalAlignment="Left" Margin="628,132,0,0" VerticalAlignment="Top" IsChecked="True" RenderTransformOrigin="-0.217,-0.221" Checked="EMG_Checked" Unchecked="EMG_Checked"/>
+        <Label x:Name="SamplingRateLabel" Content="Sampling Rate (Hz)" HorizontalAlignment="Left" Height="27" Margin="643,159,0,0" VerticalAlignment="Top" Width="113"/>
+        <ListBox x:Name="SamplingRateListBox" HorizontalAlignment="Left" Height="67" Margin="628,186,0,0" VerticalAlignment="Top" Width="139"/>
+        
     </Grid>
 </Window>

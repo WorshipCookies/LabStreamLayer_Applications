@@ -145,10 +145,10 @@ namespace BitalinoRecorder
             SamplingRateListBox.SelectedIndex = 1; // Select the default value of 100 Hz at the beginning.
         }
 
-        private void StreamData(Bitalino dev, liblsl.StreamOutlet lslout, bool ecg, bool eda, bool resp)
+        private void StreamData(Bitalino dev, liblsl.StreamOutlet lslout, bool ecg, bool eda, bool resp, bool emg)
         {
             // Simpler this way. By Default lets just open all channels we assume will be open.
-            dev.start(sampling_rate, new int[] { 0, 1, 2 });
+            dev.start(sampling_rate, new int[] { 0, 1, 2, 3 });
 
             // Data Structure used for Streaming Data
             short[,] sample = new short[100, lslChannelCount]; // Initialize Sample to the number of available Channels and chunked samples we want to send.
@@ -196,6 +196,12 @@ namespace BitalinoRecorder
                         //s += " ";
                         sample[i, auxSampleIndexer] = frames[i].analog[2];
 
+                        auxSampleIndexer += 1;
+                    }
+
+                    if (emg)
+                    {
+                        sample[i, auxSampleIndexer] = frames[i].analog[3];
                         auxSampleIndexer += 1;
                     }
                 }
@@ -264,6 +270,7 @@ namespace BitalinoRecorder
             if (lslOutlet == null)
             {
                 sampling_rate = (int)SamplingRateListBox.SelectedItem;
+
                 // This is How I Link the Output Stream!
                 lslStreamInfo = new liblsl.StreamInfo(lslStreamName + "-" + idTextBox.Text, lslStreamType, lslChannelCount, sampling_rate, lslChannelFormat, guid + "-" + idTextBox.Text);
                 lslOutlet = new liblsl.StreamOutlet(lslStreamInfo);
@@ -296,6 +303,7 @@ namespace BitalinoRecorder
                 ECGCheck.IsEnabled = false;
                 EDACheck.IsEnabled = false;
                 RespCheck.IsEnabled = false;
+                EMGCheck.IsEnabled = false;
                 SamplingRateListBox.IsEnabled = false;
             }
             else
@@ -305,6 +313,7 @@ namespace BitalinoRecorder
                 ECGCheck.IsEnabled = true;
                 EDACheck.IsEnabled = true;
                 RespCheck.IsEnabled = true;
+                EMGCheck.IsEnabled = true;
                 SamplingRateListBox.IsEnabled = true;
             }
         }
@@ -337,8 +346,9 @@ namespace BitalinoRecorder
 				bool ecgVal = ECGCheck.IsChecked.Value;
 				bool edaVal = EDACheck.IsChecked.Value;
 				bool respVal = RespCheck.IsChecked.Value;
+                bool emgVal = EMGCheck.IsChecked.Value;
 				streamingThread = new Thread(() => StreamData(connected_device, lslOutlet,
-					ecgVal, edaVal, respVal)); // Pass the connected device argument to the thread
+					ecgVal, edaVal, respVal, emgVal)); // Pass the connected device argument to the thread
 
 				streamingThread.Start(); // Start Streaming
 			}
@@ -372,6 +382,18 @@ namespace BitalinoRecorder
         private void RespCheck_Checked(object sender, RoutedEventArgs e)
         {
             if (RespCheck.IsChecked.Value)
+            {
+                lslChannelCount += 1;
+            }
+            else
+            {
+                lslChannelCount -= 1;
+            }
+        }
+
+        private void EMG_Checked(object sender, RoutedEventArgs e)
+        {
+            if (EMGCheck.IsChecked.Value)
             {
                 lslChannelCount += 1;
             }
