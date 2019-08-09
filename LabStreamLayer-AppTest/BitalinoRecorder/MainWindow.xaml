@@ -11,15 +11,17 @@
         <Button x:Name="connectButton" Content="Connect To Device" HorizontalAlignment="Left" Margin="325,36,0,0" VerticalAlignment="Top" Width="156" Height="57" Click="connectButton_Click"/>
         <TextBox x:Name="infoOutputBox" HorizontalAlignment="Left" Height="101" Margin="310,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" IsReadOnly="True"/>
         <Button x:Name="startStreamingButton" Content="Start Streaming" HorizontalAlignment="Left" Height="67" Margin="72,293,0,0" VerticalAlignment="Top" Width="158" IsEnabled="False" Click="startStreamingButton_Click"/>
-        <TextBox x:Name="streamingOutputBox" HorizontalAlignment="Left" Height="130" Margin="289,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="452" IsReadOnly="True"/>
+        <TextBox x:Name="streamingOutputBox" HorizontalAlignment="Left" Height="96" Margin="242,281,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="368" IsReadOnly="True"/>
         <TextBox x:Name="idTextBox" HorizontalAlignment="Left" Height="19" Margin="628,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="139" Text="P1" TextAlignment="Center"/>
         <TextBlock x:Name="idTextBoxLabel" HorizontalAlignment="Left" Margin="643,24,0,0" TextWrapping="Wrap" Text="Player Exp. Identifier" VerticalAlignment="Top" Width="109" TextAlignment="Center"/>
         <CheckBox x:Name="EDACheck" Content="Enable EDA (A2)" HorizontalAlignment="Left" Margin="628,92,0,0" VerticalAlignment="Top" Width="139" IsChecked="True" Checked="EDACheck_Checked" Unchecked="EDACheck_Checked"/>
         <CheckBox x:Name="ECGCheck" Content="Enable ECG (A1)" HorizontalAlignment="Left" Margin="628,72,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.495,-0.342" Width="113" IsChecked="True" Checked="ECGCheck_Checked" Unchecked="ECGCheck_Checked"/>
         <CheckBox x:Name="RespCheck" Content="Enable Respiration (A3)" HorizontalAlignment="Left" Margin="628,112,0,0" VerticalAlignment="Top" IsChecked="True" RenderTransformOrigin="-0.217,-0.221" Checked="RespCheck_Checked" Unchecked="RespCheck_Checked"/>
         <CheckBox x:Name="EMGCheck" Content="Enable EMG (A4)" HorizontalAlignment="Left" Margin="628,132,0,0" VerticalAlignment="Top" IsChecked="True" RenderTransformOrigin="-0.217,-0.221" Checked="EMG_Checked" Unchecked="EMG_Checked"/>
-        <Label x:Name="SamplingRateLabel" Content="Sampling Rate (Hz)" HorizontalAlignment="Left" Height="27" Margin="643,159,0,0" VerticalAlignment="Top" Width="113"/>
-        <ListBox x:Name="SamplingRateListBox" HorizontalAlignment="Left" Height="67" Margin="628,186,0,0" VerticalAlignment="Top" Width="139"/>
-        
+        <CheckBox x:Name="EGGCheck" Content="Enable EGG (A5)" HorizontalAlignment="Left" Margin="628,151,0,0" VerticalAlignment="Top" IsChecked="True" RenderTransformOrigin="-0.217,-0.221" Checked="EGG_Checked" Unchecked="EGG_Checked"/>
+        <Label x:Name="SamplingRateLabel" Content="Sampling Rate (Hz)" HorizontalAlignment="Left" Height="27" Margin="643,198,0,0" VerticalAlignment="Top" Width="113"/>
+        <ListBox x:Name="SamplingRateListBox" HorizontalAlignment="Left" Height="67" Margin="628,229,0,0" VerticalAlignment="Top" Width="139"/>
+
+
     </Grid>
 </Window>
