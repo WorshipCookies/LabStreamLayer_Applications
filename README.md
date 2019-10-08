@@ -1,4 +1,4 @@
-# ApplicationLSL_Test
+# LabStreamLayer_Applications
 
 This is an application suite that I am currently working on for multimodal data collection experiments. Applications developed in this suite all work on top of the LabStreaming Layer middleware allowing to fully synchronize different devices. This code is currently a work in progress and will be slowly updated as time goes on.
 
