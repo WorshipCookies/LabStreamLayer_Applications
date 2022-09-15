@@ -369,7 +369,7 @@ namespace EmpaticaE4_Recorder
 								// Treat BVP Signal Here
 								double timestamp = Convert.ToDouble(parser[1]);
 								double bvpValue = Convert.ToDouble(parser[2]);
-								lslBVPOutlet.PushSample(bvpValue, timestamp);
+								lslBVPOutlet.PushSample(bvpValue);
 								PushMsgToUI(line);
 							}
 							else if(parser[0] == "E4_Gsr" && lslGSROutlet != null)
@@ -377,7 +377,7 @@ namespace EmpaticaE4_Recorder
 								// Treat GSR Signal Here
 								double timestamp = Convert.ToDouble(parser[1]);
 								double gsrValue = Convert.ToDouble(parser[2]);
-								lslGSROutlet.PushSample(gsrValue, timestamp);
+								lslGSROutlet.PushSample(gsrValue);
 								PushMsgToUI(line);
 							}
 							else if(parser[0] == "E4_Temperature" && lslTMPOutlet != null)
@@ -385,7 +385,7 @@ namespace EmpaticaE4_Recorder
 								// Treat TMP Signal Here
 								double timestamp = Convert.ToDouble(parser[1]);
 								double tmpValue = Convert.ToDouble(parser[2]);
-								lslTMPOutlet.PushSample(tmpValue, timestamp);
+								lslTMPOutlet.PushSample(tmpValue);
 								PushMsgToUI(line);
 							}
 						}
